@@ -41,7 +41,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
             delete stow[prop]
             if(--fill<hlfng) break
           }
-    }	}	}
+    } } }
      
     //spammed parameters much fast than .call(this,args \:o/
     function nat(k ,p1,p2,p3,p4,p5,p6,p7){
@@ -96,13 +96,10 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
   var ra=sizenose(rn)            // ring anchor
 
   function sizenose(n){
-    if(n==2) return 0
-    if(n==3) return 1
-    if(n<6) return n-2
-    if(n<9) return (n*0.67) >>>0  //wild guesses
-    return 3+(n*0.23) >>>0
-    //  1:0   3:1   5:3   6:4   8:5  14:6  18:7  22:8 27:9 
-    // 31:10 35:11 40:12 44:13 48:14 53:15 57:16 60:16 ....
+    if(n<6) return n-2  //never n==1
+    if(n<20) return (n*0.67) >>>0 
+    return 5+(n*0.37) >>>0
+    //  1:0   3:1   5:3   6:4   8:5  9:6  16:10  19:12  ...
   }
   
   //fills array with type of first seen throughput
