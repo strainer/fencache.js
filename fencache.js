@@ -12,15 +12,14 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
   var id = function(k){return k}
   var h = typeof(hs)
   
-  if(h==='function'){ id=hs }
+  if(h==='function') id=hs 
   else
   if( (rn<1 && h!=='string') || h==='object' ){ 
     if(h==='number') id=function(k){ return ""+k }
-    else{ id=function(k){ 
+    else id=function(k){ 
       if(typeof(k)==='number') return ""+k
       if(typeof(k)==='string') return k 
       return JSON.stringify(k)
-      } 
     }
   }
   
@@ -28,7 +27,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     return fn(k ,p1,p2,p3,p4,p5,p6,p7)
   }
   
-  //init memory in native object
+  /// init memory in native object
   if(rn<1){
     var stow={}, fill=0, fills=function(){}
     
@@ -56,7 +55,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     nat.put=function(v ,k ,p1,p2,p3,p4,p5,p6,p7){ 
       var bv=stow[kid=id(k ,p1,p2,p3,p4,p5,p6,p7)] 
       stow[kid]=v
-      if(bv===undefined){ fills() } 
+      if(bv===undefined) fills() 
       return bv }
     nat.val=function(k){ return stow[id(k)] }
     nat.bypass=bypass
@@ -66,7 +65,6 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
   
   //remember last value only
   if(rn===1) { 
-    
     function last(kid){
       if(key===kid){ return val }
       else{ 
@@ -88,15 +86,14 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     return last
   } 
 
-  /// queue vals in nosering buffer
-  
+  /// queue vals in nose ring buffer
   key= new Array(rn), val= new Array(rn) 
 
   var kid, rc=-1, rex=rn-1, re=1 // ring currentx, ring end max, ring end
   var ra=sizenose(rn)            // ring anchor
 
   function sizenose(n){
-    if(n<6) return n-2  //never n==1
+    if(n<7) return n-2  //never n==1
     if(n<20) return (n*0.67) >>>0 
     return 5+(n*0.37) >>>0
     //  1:0   3:1   5:3   6:4   8:5  9:6  16:10  19:12  ...
@@ -106,7 +103,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
   var ainit = function(k ,p1,p2,p3,p4,p5,p6,p7){
     kid=id(k ,p1,p2,p3,p4,p5,p6,p7)
     var v=fn(k ,p1,p2,p3,p4,p5,p6,p7)
-    for(var i=0;i<key.length;i++){ key[i]=kid ; val[i]=v }
+    for(var i=0;i<key.length;i++) key[i]=kid,val[i]=v
     
     init=function(){}
   }
@@ -131,7 +128,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
       return v 
     }
     //not found, so write to fill
-    if(rc===re){ if(rc===rex){ rc=ra }else{ re++ } }
+    if(rc===re) if(rc===rex){ rc=ra }else{ re++ } 
     key[++rc]=kid
     return val[rc]=fn(k ,p1,p2,p3,p4,p5,p6,p7) //put result in new head
   } 
@@ -142,7 +139,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     for(var i=0; i<=re; i++) if(key[i]===kid) 
     { var bv=val[i] ; val[i]=v ; return bv }
     //missed, so write to fill
-    if(rc===re){ if(rc===rex){ rc=ra }else{ re++ } }
+    if(rc===re) if(rc===rex){ rc=ra }else{ re++ }
     key[++rc]=kid
     return val[rc]=fn(k ,p1,p2,p3,p4,p5,p6,p7) //put result in new head
   }
