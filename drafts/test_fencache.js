@@ -65,16 +65,24 @@ var as200x = Fdrandom.bulk(
  ,function(){ return Fdrandom.mixof("shqwdheodcof  3084 {;@@/  ",Fdrandom.irange(1,300)) } 
 )
 
+testarlen=100
+var as100x = Fdrandom.bulk( 
+  testarlen 
+ ,function(){ return Fdrandom.mixof("shqwdheodcof  3084 {;@@/  ",Fdrandom.irange(1,300)) } 
+)
+
 testarlen=200
 var as1kx = Fdrandom.bulk( 
   testarlen 
  ,function(){ return Fdrandom.mixof("shqwdheodcof  3084 {;@@/  ",Fdrandom.irange(1,300))}
 )
 
-var as1k2de=as1kx.concat(as200x).concat(as200x).concat(as200x).concat(as200x)
+var str1k4x200=as1kx.concat(as200x).concat(as200x).concat(as200x).concat(as200x)
+var str1k8x100=as1kx.concat(as100x).concat(as100x).concat(as100x).concat(as100x).concat(as100x).concat(as100x).concat(as100x).concat(as100x)
 
-testarlen=2000
-as1k2de = Fdrandom.mixof(as1k2de,testarlen)
+testarlen=1000
+str1k4x200 = Fdrandom.mixof(str1k4x200,testarlen)
+str1k8x100 = Fdrandom.mixof(str1k8x100,testarlen)
 
 var boop =4
 function addit(c){
@@ -85,7 +93,7 @@ function addit(c){
 //~ boop=1
 //~ console.log(enboop(2))
 //~ return
-//~ console.log(as1k2de[0],as1k2de[1])
+//~ console.log(str1k4x200[0],str1k4x200[1])
 //~ return
 
 var strfast=function(c){ return c.length }
@@ -98,7 +106,6 @@ var strslow=function(c){
   return c.split("").length 
 }
 
-strfast=strslow
 
 var maveric=1
 var mulsin=function(c){ 
@@ -106,32 +113,46 @@ var mulsin=function(c){
     maveric+ Math.sin(c+=0.25)+Math.sin(c*c)+Math.cos(c+0.5)+Math.cos(c*c+0.5)
 }
 
-var strfam0 = fencache(strfast,0)
-var strfam1 = fencache(strfast,-1)
-var strfam2 = fencache(strfast,-2)
-var strfam100 = fencache(strfast,-100)
-var strfa1 = fencache(strfast,-1)
-var strfa3 = fencache(strfast,-3)
-var strfa10 = fencache(strfast,-10)
-var strfa100 = fencache(strfast,-100)
-var strfa200 = fencache(strfast,350)
-var strfa400 = fencache(strfast,0)
+var strfa200 = fencache(strfast,20)
+var strfa400 = fencache(strfast,40)
+var strfa_0 = fencache(strfast,0)
+var strfa_3 = fencache(strfast,-3)
+var strfa_200 = fencache(strfast,200)
+var strfa_1000 = fencache(strfast,1000)
+var strfa_2000 = fencache(strfast,2000)
+var strfz = memoiz(strfast)
+var strf_ = _.memoize(strfast)
 
-//~ strfa3("1dhue")
-//~ strfa3("2dhue")
-//~ strfa3("3dhue")
-//~ strfa3("4dhue")
-//~ strfa3("5dhue")
-//~ strfa3("6dhue")
-//~ strfa3("7dhue")
-//~ console.log(strfa3.state())
-//~ return
+var strsl200 = fencache(strslow,200)
+var strsl400 = fencache(strslow,400)
+var strsl_0 = fencache(strslow,-1)
+var strsl_3 = fencache(strslow,-3)
+var strsl_200 = fencache(strslow,200)
+var strsl_1000 = fencache(strslow,1000)
+var strsl_2000 = fencache(strslow,2000)
+var strsz = memoiz(strslow)
+var strs_ = _.memoize(strslow)
 
 var fentest1 =[
 
   (function(){ 
-  var arn="as1k2de" ,fnn="strfast"
-  var arr= as1k2de  ,fun=strfast
+  var arn="str1k4x200" ,fnn="strfast"
+  var arr= str1k4x200  ,fun=strfast
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strfa_0"
+  var arr= str1k4x200  ,fun=strfa_0
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -146,8 +167,8 @@ var fentest1 =[
 ,
 
   (function(){ 
-  var arn="as1k2de" ,fnn="strfam0"
-  var arr= as1k2de  ,fun=strfam0
+  var arn="str1k4x200" ,fnn="strfa_3"
+  var arr= str1k4x200  ,fun=strfa_3
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -160,10 +181,101 @@ var fentest1 =[
     }
 } }())
 ,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strfa_200"
+  var arr= str1k4x200  ,fun=strfa_200
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strfa_1000"
+  var arr= str1k4x200  ,fun=strfa_1000
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strfa_2000"
+  var arr= str1k4x200  ,fun=strfa_2000
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strfa200"
+  var arr= str1k4x200  ,fun=strfa200
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strfz"
+  var arr= str1k4x200  ,fun=strfz
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }()),
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strf_"
+  var arr= str1k4x200  ,fun=strf_
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
 
+
+
+, 
   (function(){ 
-  var arn="as1k2de" ,fnn="strfam1"
-  var arr= as1k2de  ,fun=strfam1
+  var arn="str1k4x200" ,fnn="strslow"
+  var arr= str1k4x200  ,fun=strslow
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -177,8 +289,8 @@ var fentest1 =[
 } }())
 ,
   (function(){ 
-  var arn="as1k2de" ,fnn="strfam2"
-  var arr= as1k2de  ,fun=strfam2
+  var arn="str1k4x200" ,fnn="strsl_0"
+  var arr= str1k4x200  ,fun=strsl_0
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -192,8 +304,98 @@ var fentest1 =[
 } }())
 ,
   (function(){ 
-  var arn="as1k2de" ,fnn="strfam100"
-  var arr= as1k2de  ,fun=strfam100
+  var arn="str1k4x200" ,fnn="strsl_3"
+  var arr= str1k4x200  ,fun=strsl_3
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strsl_200"
+  var arr= str1k4x200  ,fun=strsl_200
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strsl_1000"
+  var arr= str1k4x200  ,fun=strsl_1000
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strsl_2000"
+  var arr= str1k4x200  ,fun=strsl_2000
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strsl200"
+  var arr= str1k4x200  ,fun=strsl200
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strsz"
+  var arr= str1k4x200  ,fun=strsz
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strs_"
+  var arr= str1k4x200  ,fun=strs_
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -209,11 +411,172 @@ var fentest1 =[
 ]
 
 
+
+
+
+
+var fentest1 =[
+
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strfast"
+  var arr= str1k4x200  ,fun=strfast
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strfa_0"
+  var arr= str1k4x200  ,fun=strfa_0
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strfa200"
+  var arr= str1k4x200  ,fun=strfa200
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strfa400"
+  var arr= str1k4x200  ,fun=strfa400
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strf_"
+  var arr= str1k4x200  ,fun=strf_
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+
+
+
+, 
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strslow"
+  var arr= str1k4x200  ,fun=strslow
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strsl_0"
+  var arr= str1k4x200  ,fun=strsl_0
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strsl200"
+  var arr= str1k4x200  ,fun=strsl200
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strsl400"
+  var arr= str1k4x200  ,fun=strsl400
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k4x200" ,fnn="strs_"
+  var arr= str1k4x200  ,fun=strs_
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+  
+]
+
 var fentest2 =[
 
   (function(){ 
-  var arn="as1k2de" ,fnn="strfast"
-  var arr= as1k2de  ,fun=strfast
+  var arn="str1k8x100" ,fnn="strfast"
+  var arr= str1k8x100  ,fun=strfast
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -227,24 +590,8 @@ var fentest2 =[
 } }())
 ,
   (function(){ 
-  var arn="as1k2de" ,fnn="strfa1"
-  var arr= as1k2de  ,fun=strfa1
- 
-  return{
-    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
-   ,func:function (){
-      var r=0, a=arr
-      for(var i=0,e=a.length;i<e;i++){
-        r+=fun(a[i])
-      } 
-      return r
-    }
-} }())
-,
-
-  (function(){ 
-  var arn="as1k2de" ,fnn="strfa3"
-  var arr= as1k2de  ,fun=strfa3
+  var arn="str1k8x100" ,fnn="strfa_0"
+  var arr= str1k8x100  ,fun=strfa_0
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -259,8 +606,8 @@ var fentest2 =[
 ,
 
   (function(){ 
-  var arn="as1k2de" ,fnn="strfa10"
-  var arr= as1k2de  ,fun=strfa10
+  var arn="str1k8x100" ,fnn="strfa_3"
+  var arr= str1k8x100  ,fun=strfa_3
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -274,8 +621,68 @@ var fentest2 =[
 } }())
 ,
   (function(){ 
-  var arn="as1k2de" ,fnn="strfa100"
-  var arr= as1k2de  ,fun=strfa100
+  var arn="str1k8x100" ,fnn="strfa_200"
+  var arr= str1k8x100  ,fun=strfa_200
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k8x100" ,fnn="strfa_1000"
+  var arr= str1k8x100  ,fun=strfa_1000
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k8x100" ,fnn="strfa_2000"
+  var arr= str1k8x100  ,fun=strfa_2000
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k8x100" ,fnn="strfa200"
+  var arr= str1k8x100  ,fun=strfa200
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k8x100" ,fnn="strfz"
+  var arr= str1k8x100  ,fun=strfz
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -288,8 +695,8 @@ var fentest2 =[
     }
 } }()),
   (function(){ 
-  var arn="as1k2de" ,fnn="strfa200"
-  var arr= as1k2de  ,fun=strfa200
+  var arn="str1k8x100" ,fnn="strf_"
+  var arr= str1k8x100  ,fun=strf_
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -300,10 +707,135 @@ var fentest2 =[
       } 
       return r
     }
-} }()),
+} }())
+
+
+
+, 
   (function(){ 
-  var arn="as1k2de" ,fnn="strfa400"
-  var arr= as1k2de  ,fun=strfa400
+  var arn="str1k8x100" ,fnn="strslow"
+  var arr= str1k8x100  ,fun=strslow
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k8x100" ,fnn="strsl_0"
+  var arr= str1k8x100  ,fun=strsl_0
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+
+  (function(){ 
+  var arn="str1k8x100" ,fnn="strsl_3"
+  var arr= str1k8x100  ,fun=strsl_3
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k8x100" ,fnn="strsl_200"
+  var arr= str1k8x100  ,fun=strsl_200
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k8x100" ,fnn="strsl_1000"
+  var arr= str1k8x100  ,fun=strsl_1000
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k8x100" ,fnn="strsl_2000"
+  var arr= str1k8x100  ,fun=strsl_2000
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k8x100" ,fnn="strsz"
+  var arr= str1k8x100  ,fun=strsz
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k8x100" ,fnn="strs_"
+  var arr= str1k8x100  ,fun=strs_
+ 
+  return{
+    desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
+   ,func:function (){
+      var r=0, a=arr
+      for(var i=0,e=a.length;i<e;i++){
+        r+=fun(a[i])
+      } 
+      return r
+    }
+} }())
+,
+  (function(){ 
+  var arn="str1k8x100" ,fnn="strsl200"
+  var arr= str1k8x100  ,fun=strsl200
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -870,14 +1402,16 @@ var msin2   = fencache( Math.sin,2 )
 var msin1   = fencache( Math.sin,1 )
 
 
+
 var testlist=[
  {rc:warmupset     ,ds:"warmup benchmarks"}
-//~ ,{rc:fentest1      ,ds:"fencache"} 
+,{rc:fentest1      ,ds:"fencache"} 
 //~ ,{rc:fentest2      ,ds:"fencacheb"}
-,{rc:fentest3      ,ds:"stored, multi_trig, 100norm"}
-,{rc:fentest4      ,ds:"ringed, multi_trig, 100norm"}
-,{rc:fentest5      ,ds:"ringed, multi_trig, 20norm"}
-,{rc:fentest6      ,ds:"ringed, multi_trig, 8norm"}
+//~ ,{rc:fentest3      ,ds:"stored, multi_trig, 100norm"}
+//~ ,{rc:fentest4      ,ds:"ringed, multi_trig, 100norm"}
+
+//~ ,{rc:fentest5      ,ds:"ringed, multi_trig, 20norm"}
+//~ ,{rc:fentest6      ,ds:"ringed, multi_trig, 8norm"}
 ]
 
 var testlenseconds=1.2, reps=2

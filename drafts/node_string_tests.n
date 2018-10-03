@@ -1,0 +1,219 @@
+
+<sys>; >node test_fencache2.js
+
+Testing: warmup benchmarks
+  Code: Math.sqrt(i)  ( squareroot )
+    206.0785 Kfunc/ms   avg rslt : 7455.619881806283
+    205.9457 Kfunc/ms   avg rslt : 7455.619881806017
+  Code: r+=i  ( fastest dummy test )
+    1.0493 Mfunc/ms   avg rslt : 125002.5
+    1.0132 Mfunc/ms   avg rslt : 125002.5
+  avg rslt op/ms 618641.4714246377
+
+Testing: short str fast
+  Code: r+=strfast(shortstr3[i])  ( strfast )
+    294.4414 Kfunc/ms   avg rslt : 1000
+    294.4155 Kfunc/ms   avg rslt : 1000
+  Code: r+=strfa_0(shortstr3[i])  ( strfa_0 )
+    43.2494 Kfunc/ms   avg rslt : 1000
+    43.0853 Kfunc/ms   avg rslt : 1000
+  Code: r+=strfa_undrscr(shortstr3[i])  ( strfa_undrscr )
+    6.2927 Kfunc/ms   avg rslt : 1000
+    6.3011 Kfunc/ms   avg rslt : 1000
+  Code: r+=strfa:5(shortstr3[i])  ( strfa:5 )
+    19.7955 Kfunc/ms   avg rslt : 1000
+    19.7505 Kfunc/ms   avg rslt : 1000
+  avg rslt op/ms 90916.41453014761
+
+Testing: long str fast
+  Code: r+=strfast(longstr3[i])  ( strfast )
+    294.8151 Kfunc/ms   avg rslt : 200000
+    294.7630 Kfunc/ms   avg rslt : 200000
+  Code: r+=strfa_0(longstr3[i])  ( strfa_0 )
+    24.2276 Kfunc/ms   avg rslt : 200000
+    24.2104 Kfunc/ms   avg rslt : 200000
+  Code: r+=strfa_undrscr(longstr3[i])  ( strfa_undrscr )
+    5.1165 Kfunc/ms   avg rslt : 200000
+    5.1338 Kfunc/ms   avg rslt : 200000
+  Code: r+=strfa:5(longstr3[i])  ( strfa:5 )
+    21.1756 Kfunc/ms   avg rslt : 200000
+    21.1156 Kfunc/ms   avg rslt : 200000
+  avg rslt op/ms 86319.69029591397
+
+Testing: short str slow
+  Code: r+=strslow(shortstr3[i])  ( strslow )
+    295.9938  func/ms   avg rslt : 33000
+    296.6467  func/ms   avg rslt : 33000
+  Code: r+=strso_0(shortstr3[i])  ( strso_0 )
+    27.9316 Kfunc/ms   avg rslt : 33000
+    27.9564 Kfunc/ms   avg rslt : 33000
+  Code: r+=strso_undrscr(shortstr3[i])  ( strso_undrscr )
+    6.2684 Kfunc/ms   avg rslt : 33000
+    6.2715 Kfunc/ms   avg rslt : 33000
+  Code: r+=strso:5(shortstr3[i])  ( strso:5 )
+    1.5159 Kfunc/ms   avg rslt : 33000
+    1.5175 Kfunc/ms   avg rslt : 33000
+  avg rslt op/ms 9006.732272063926
+
+Testing: long str slow
+  Code: r+=strslow(longstr3[i])  ( strslow )
+    10.2854  func/ms   avg rslt : 3615000
+    10.3241  func/ms   avg rslt : 3615000
+  Code: r+=strso_0(longstr3[i])  ( strso_0 )
+    17.7815 Kfunc/ms   avg rslt : 3615000
+    17.8277 Kfunc/ms   avg rslt : 3615000
+  Code: r+=strso_undrscr(longstr3[i])  ( strso_undrscr )
+    5.1641 Kfunc/ms   avg rslt : 3615000
+    5.1664 Kfunc/ms   avg rslt : 3615000
+  Code: r+=strso:5(longstr3[i])  ( strso:5 )
+    14.9153 Kfunc/ms   avg rslt : 3615000
+    14.9068 Kfunc/ms   avg rslt : 3615000
+  avg rslt op/ms 9472.800918082003
+-Exit code: 0   Time: 46.062
+
+
+<sys>; >node test_fencache2.js
+
+Testing: warmup benchmarks
+  Code: Math.sqrt(i)  ( squareroot )
+    206.6388 Kfunc/ms   avg rslt : 7455.619881801349
+    206.0953 Kfunc/ms   avg rslt : 7455.619881805761
+  Code: r+=i  ( fastest dummy test )
+    1.0783 Mfunc/ms   avg rslt : 125002.5
+    1.0889 Mfunc/ms   avg rslt : 125002.5
+  avg rslt op/ms 644994.3775806166
+
+Testing: short str fast
+  Code: r+=strfast(shortstr3[i])  ( strfast )
+    294.6543 Kfunc/ms   avg rslt : 1794
+    294.7858 Kfunc/ms   avg rslt : 1794
+  Code: r+=strfa_0(shortstr3[i])  ( strfa_0 )
+    43.2072 Kfunc/ms   avg rslt : 1794
+    43.2349 Kfunc/ms   avg rslt : 1794
+  Code: r+=strfa_undrscr(shortstr3[i])  ( strfa_undrscr )
+    6.2215 Kfunc/ms   avg rslt : 1794
+    6.2232 Kfunc/ms   avg rslt : 1794
+  Code: r+=strfa:50(shortstr3[i])  ( strfa:50 )
+    2.4146 Kfunc/ms   avg rslt : 1794
+    2.4177 Kfunc/ms   avg rslt : 1794
+  avg rslt op/ms 86644.91821452323
+
+Testing: long str fast
+  Code: r+=strfast(longstr3[i])  ( strfast )
+    294.7092 Kfunc/ms   avg rslt : 200000
+    295.1383 Kfunc/ms   avg rslt : 200000
+  Code: r+=strfa_0(longstr3[i])  ( strfa_0 )
+    33.1335 Kfunc/ms   avg rslt : 200000
+    33.1218 Kfunc/ms   avg rslt : 200000
+  Code: r+=strfa_undrscr(longstr3[i])  ( strfa_undrscr )
+    5.2320 Kfunc/ms   avg rslt : 200000
+    5.2304 Kfunc/ms   avg rslt : 200000
+  Code: r+=strfa:50(longstr3[i])  ( strfa:50 )
+    4.7546 Kfunc/ms   avg rslt : 200000
+    4.7584 Kfunc/ms   avg rslt : 200000
+  avg rslt op/ms 84509.77460237031
+
+Testing: short str slow
+  Code: r+=strslow(shortstr3[i])  ( strslow )
+    255.3598  func/ms   avg rslt : 47292
+    255.1915  func/ms   avg rslt : 47292
+  Code: r+=strso_0(shortstr3[i])  ( strso_0 )
+    27.3704 Kfunc/ms   avg rslt : 47292
+    27.2492 Kfunc/ms   avg rslt : 47292
+  Code: r+=strso_undrscr(shortstr3[i])  ( strso_undrscr )
+    6.2061 Kfunc/ms   avg rslt : 47292
+    6.2127 Kfunc/ms   avg rslt : 47292
+  Code: r+=strso:50(shortstr3[i])  ( strso:50 )
+    1.9664 Kfunc/ms   avg rslt : 47292
+    1.9674 Kfunc/ms   avg rslt : 47292
+  avg rslt op/ms 8935.329289172541
+
+Testing: long str slow
+  Code: r+=strslow(longstr3[i])  ( strslow )
+    10.3081  func/ms   avg rslt : 3615000
+    10.2727  func/ms   avg rslt : 3615000
+  Code: r+=strso_0(longstr3[i])  ( strso_0 )
+    22.8367 Kfunc/ms   avg rslt : 3615000
+    22.9456 Kfunc/ms   avg rslt : 3615000
+  Code: r+=strso_undrscr(longstr3[i])  ( strso_undrscr )
+    5.1455 Kfunc/ms   avg rslt : 3615000
+    5.1559 Kfunc/ms   avg rslt : 3615000
+  Code: r+=strso:50(longstr3[i])  ( strso:50 )
+    4.4186 Kfunc/ms   avg rslt : 3615000
+    4.4197 Kfunc/ms   avg rslt : 3615000
+  avg rslt op/ms 8117.813832527842
+-Exit code: 0   Time: 45.666
+
+
+<sys>; >node test_fencache2.js
+
+Testing: warmup benchmarks
+  Code: Math.sqrt(i)  ( squareroot )
+    206.3299 Kfunc/ms   avg rslt : 7455.619881803756
+    206.3651 Kfunc/ms   avg rslt : 7455.6198818068215
+  Code: r+=i  ( fastest dummy test )
+    1.0882 Mfunc/ms   avg rslt : 125002.5
+    1.0894 Mfunc/ms   avg rslt : 125002.5
+  avg rslt op/ms 647574.8788096888
+
+Testing: short str fast
+  Code: r+=strfast(shortstr3[i])  ( strfast )
+    294.4331 Kfunc/ms   avg rslt : 2769
+    294.4854 Kfunc/ms   avg rslt : 2769
+  Code: r+=strfa_0(shortstr3[i])  ( strfa_0 )
+    43.0682 Kfunc/ms   avg rslt : 2769
+    43.0569 Kfunc/ms   avg rslt : 2769
+  Code: r+=strfa_undrscr(shortstr3[i])  ( strfa_undrscr )
+    6.1674 Kfunc/ms   avg rslt : 2769
+    6.1536 Kfunc/ms   avg rslt : 2769
+  Code: r+=strfa:500(shortstr3[i])  ( strfa:500 )
+    306.7528  func/ms   avg rslt : 2769
+    306.8514  func/ms   avg rslt : 2769
+  avg rslt op/ms 85997.28554839281
+
+Testing: long str fast
+  Code: r+=strfast(longstr3[i])  ( strfast )
+    287.5879 Kfunc/ms   avg rslt : 200000
+    288.2691 Kfunc/ms   avg rslt : 200000
+  Code: r+=strfa_0(longstr3[i])  ( strfa_0 )
+    28.1767 Kfunc/ms   avg rslt : 200000
+    28.1579 Kfunc/ms   avg rslt : 200000
+  Code: r+=strfa_undrscr(longstr3[i])  ( strfa_undrscr )
+    4.9668 Kfunc/ms   avg rslt : 200000
+    4.9718 Kfunc/ms   avg rslt : 200000
+  Code: r+=strfa:500(longstr3[i])  ( strfa:500 )
+    485.2183  func/ms   avg rslt : 200000
+    488.2413  func/ms   avg rslt : 200000
+  avg rslt op/ms 80387.97028099521
+
+Testing: short str slow
+  Code: r+=strslow(shortstr3[i])  ( strslow )
+    210.9465  func/ms   avg rslt : 64842
+    211.5044  func/ms   avg rslt : 64842
+  Code: r+=strso_0(shortstr3[i])  ( strso_0 )
+    27.0681 Kfunc/ms   avg rslt : 64842
+    26.9453 Kfunc/ms   avg rslt : 64842
+  Code: r+=strso_undrscr(shortstr3[i])  ( strso_undrscr )
+    5.8464 Kfunc/ms   avg rslt : 64842
+    5.8668 Kfunc/ms   avg rslt : 64842
+  Code: r+=strso:500(shortstr3[i])  ( strso:500 )
+    306.3783  func/ms   avg rslt : 64842
+    306.3657  func/ms   avg rslt : 64842
+  avg rslt op/ms 8345.213675867231
+
+Testing: long str slow
+  Code: r+=strslow(longstr3[i])  ( strslow )
+    10.1319  func/ms   avg rslt : 3615000
+    9.9831  func/ms   avg rslt : 3615000
+  Code: r+=strso_0(longstr3[i])  ( strso_0 )
+    19.8090 Kfunc/ms   avg rslt : 3615000
+    19.7571 Kfunc/ms   avg rslt : 3615000
+  Code: r+=strso_undrscr(longstr3[i])  ( strso_undrscr )
+    4.8203 Kfunc/ms   avg rslt : 3615000
+    4.7977 Kfunc/ms   avg rslt : 3615000
+  Code: r+=strso:500(longstr3[i])  ( strso:500 )
+    481.1454  func/ms   avg rslt : 3615000
+    480.8626  func/ms   avg rslt : 3615000
+  avg rslt op/ms 6270.781785942784
+-Exit code: 0   Time: 46.474
+

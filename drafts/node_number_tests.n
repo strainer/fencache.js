@@ -1,0 +1,129 @@
+
+<sys>; >node test_fencache2.js
+
+Testing: warmup benchmarks
+  Code: Math.sqrt(i)  ( squareroot )
+    206.7270 Kfunc/ms   avg rslt : 7455.619881805129
+    206.2949 Kfunc/ms   avg rslt : 7455.619881802166
+  Code: r+=i  ( fastest dummy test )
+    1.0539 Mfunc/ms   avg rslt : 125002.5
+    1.0731 Mfunc/ms   avg rslt : 125002.5
+  avg rslt op/ms 634982.1459207021
+
+Testing: number, sin, mixed hit:5
+  Code: r+=Math.sin(number[i])  ( Math.sin )
+    11.8293 Kfunc/ms   avg rslt : 7.421359602833162e-14
+    11.8219 Kfunc/ms   avg rslt : 7.421359602832733e-14
+  Code: r+=ensin_0(number[i])  ( ensin_0 )
+    1.1912 Kfunc/ms   avg rslt : 7.421359602832742e-14
+    1.0613 Kfunc/ms   avg rslt : 7.421359602832756e-14
+  Code: r+=ensin_undrscr(number[i])  ( ensin_undrscr )
+    1.0812 Kfunc/ms   avg rslt : 7.421359602832754e-14
+    1.1099 Kfunc/ms   avg rslt : 7.421359602832752e-14
+  Code: r+=ensin:5(number[i])  ( ensin:5 )
+    16.1370 Kfunc/ms   avg rslt : 7.421359602830707e-14
+    16.1300 Kfunc/ms   avg rslt : 7.421359602830927e-14
+  avg rslt op/ms 7545.2239615477065
+
+Testing: number, multisin, mixed hit:5
+  Code: r+=Multi.sin(number[i])  ( Multi.sin )
+    1.9774 Kfunc/ms   avg rslt : -198.56047212239346
+    1.9771 Kfunc/ms   avg rslt : -198.5604721223935
+  Code: r+=enmulti_0(number[i])  ( enmulti_0 )
+    1.0087 Kfunc/ms   avg rslt : -198.56047212239343
+    1.0134 Kfunc/ms   avg rslt : -198.56047212239343
+  Code: r+=enmulti_undrscr(number[i])  ( enmulti_undrscr )
+    1.0913 Kfunc/ms   avg rslt : -198.5604721223934
+    1.0773 Kfunc/ms   avg rslt : -198.5604721223934
+  Code: r+=enmulti:5(number[i])  ( enmulti:5 )
+    13.3612 Kfunc/ms   avg rslt : -198.56047212239352
+    13.3750 Kfunc/ms   avg rslt : -198.56047212239352
+  avg rslt op/ms 4360.185268635018
+-Exit code: 0   Time: 25.767
+
+
+<sys>; >node test_fencache2.js
+
+Testing: warmup benchmarks
+  Code: Math.sqrt(i)  ( squareroot )
+    206.4353 Kfunc/ms   avg rslt : 7455.619881805357
+    206.4482 Kfunc/ms   avg rslt : 7455.619881804389
+  Code: r+=i  ( fastest dummy test )
+    1.0412 Mfunc/ms   avg rslt : 125002.5
+    1.0083 Mfunc/ms   avg rslt : 125002.5
+  avg rslt op/ms 615601.3137908716
+
+Testing: number, sin, mixed hit:50
+  Code: r+=Math.sin(number[i])  ( Math.sin )
+    10.4936 Kfunc/ms   avg rslt : -2.8673809616997793e-13
+    10.4701 Kfunc/ms   avg rslt : -2.8673809616997803e-13
+  Code: r+=ensin_0(number[i])  ( ensin_0 )
+    1.5020 Kfunc/ms   avg rslt : -2.867380961700493e-13
+    1.4764 Kfunc/ms   avg rslt : -2.8673809617004866e-13
+  Code: r+=ensin_undrscr(number[i])  ( ensin_undrscr )
+    1.2028 Kfunc/ms   avg rslt : -2.867380961700475e-13
+    1.2264 Kfunc/ms   avg rslt : -2.8673809617004654e-13
+  Code: r+=ensin:50(number[i])  ( ensin:50 )
+    7.3656 Kfunc/ms   avg rslt : -2.867380961699904e-13
+    7.3643 Kfunc/ms   avg rslt : -2.867380961699885e-13
+  avg rslt op/ms 5137.639747662021
+
+Testing: number, multisin, mixed hit:50
+  Code: r+=Multi.sin(number[i])  ( Multi.sin )
+    1.9601 Kfunc/ms   avg rslt : 11.051211281934242
+    1.9583 Kfunc/ms   avg rslt : 11.051211281934243
+  Code: r+=enmulti_0(number[i])  ( enmulti_0 )
+    1.4027 Kfunc/ms   avg rslt : 11.051211281934247
+    1.4019 Kfunc/ms   avg rslt : 11.051211281934249
+  Code: r+=enmulti_undrscr(number[i])  ( enmulti_undrscr )
+    1.2050 Kfunc/ms   avg rslt : 11.05121128193425
+    1.2269 Kfunc/ms   avg rslt : 11.05121128193425
+  Code: r+=enmulti:50(number[i])  ( enmulti:50 )
+    6.7294 Kfunc/ms   avg rslt : 11.051211281936379
+    6.7226 Kfunc/ms   avg rslt : 11.051211281936533
+  avg rslt op/ms 2825.859060698879
+-Exit code: 0   Time: 25.561
+
+
+<sys>; >node test_fencache2.js
+
+Testing: warmup benchmarks
+  Code: Math.sqrt(i)  ( squareroot )
+    206.8239 Kfunc/ms   avg rslt : 7455.619881804314
+    206.1870 Kfunc/ms   avg rslt : 7455.61988180572
+  Code: r+=i  ( fastest dummy test )
+    1.0918 Mfunc/ms   avg rslt : 125002.5
+    1.0934 Mfunc/ms   avg rslt : 125002.5
+  avg rslt op/ms 649550.6996008754
+
+Testing: number, sin, mixed hit:500
+  Code: r+=Math.sin(number[i])  ( Math.sin )
+    11.8926 Kfunc/ms   avg rslt : 3.920301118040505e-13
+    11.9080 Kfunc/ms   avg rslt : 3.920301118040304e-13
+  Code: r+=ensin_0(number[i])  ( ensin_0 )
+    1.4441 Kfunc/ms   avg rslt : 3.92030111804194e-13
+    1.4105 Kfunc/ms   avg rslt : 3.92030111804194e-13
+  Code: r+=ensin_undrscr(number[i])  ( ensin_undrscr )
+    1.2067 Kfunc/ms   avg rslt : 3.92030111804194e-13
+    1.2059 Kfunc/ms   avg rslt : 3.92030111804194e-13
+  Code: r+=ensin:500(number[i])  ( ensin:500 )
+    1.3008 Kfunc/ms   avg rslt : 3.92030111804194e-13
+    1.3034 Kfunc/ms   avg rslt : 3.92030111804194e-13
+  avg rslt op/ms 3958.990989375809
+
+Testing: number, multisin, mixed hit:500
+  Code: r+=Multi.sin(number[i])  ( Multi.sin )
+    1.7309 Kfunc/ms   avg rslt : -76.39881759946074
+    1.7305 Kfunc/ms   avg rslt : -76.39881759946073
+  Code: r+=enmulti_0(number[i])  ( enmulti_0 )
+    1.3459 Kfunc/ms   avg rslt : -76.39881759946093
+    1.3344 Kfunc/ms   avg rslt : -76.39881759946095
+  Code: r+=enmulti_undrscr(number[i])  ( enmulti_undrscr )
+    1.1900 Kfunc/ms   avg rslt : -76.39881759946111
+    1.1848 Kfunc/ms   avg rslt : -76.39881759946105
+  Code: r+=enmulti:500(number[i])  ( enmulti:500 )
+    1.2775 Kfunc/ms   avg rslt : -76.398817599461
+    1.2793 Kfunc/ms   avg rslt : -76.39881759946095
+  avg rslt op/ms 1384.162945691781
+-Exit code: 0   Time: 25.725
+
