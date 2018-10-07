@@ -1,0 +1,23 @@
+{
+  "name": "fencache",
+  "version": "1.1.0",
+  "description": "A fast memoizer which forgets least accessed calculations",
+  "main": "fencache.js",
+  "scripts": {
+    "test": "(fencache(Math.sin))(0)===Math.sin(0)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strainer/fencache.js.git"
+  },
+  "keywords": [
+    "memoize",
+    "memoizer"
+  ],
+  "author": "Andrew Strain <AndrewInput@gmail.com> (https://github.com/strainer/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/strainer/fencache.js/issues"
+  },
+  "homepage": "https://github.com/strainer/fencache.js#readme"
+}

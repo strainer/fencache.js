@@ -75,7 +75,7 @@ When cache size is set to 1, this parameter is ignored as the cost of any keying
 
 ### Cache size
  
-The following explainations may be unclear. Basically, try values between 1 and a few hundred depending on the weight of the 'carried' function and on the distribution of repetitive inputs. 
+If the following explainations are not clear, basically, try values between 1 and a few hundred depending on the weight of the 'carried' function and on the distribution of repetitive inputs. 
 
 Where 'mixed hit' means average time to randomly access and return 
 results from a full cache:
@@ -92,7 +92,7 @@ the cache:
 
 Performance of memoizers which use javascripts native store is very different, they must stringify numeric arguments and also hash them, so the stores best return time of floating point keyed data (required for math functions) is about 8 times slower than Math.sin (25 times slower that fencaches best). The native hash tables performance scales better with n items stored, but still it takes until about n=400 to catch up with fencaches sorted list mode - when accessed randomly. When the hits are accessed in a bell shaped distribution, the sorted list mode can work a great deal faster as most of the hits are found early in its list.
 
-### Performance micro optimizations
+### Performance micro-optimizations
 
 On the first call, fencache fills its two storage arrays with the first argument:result pair it sees. This allows both V8 and spidermonkey to make the arrays contigious and fit the right types and much improves the subsequent performance of the arrays. If the types are to be real numbers, make sure the first calculation is not by chance an integer, as this can mix types in the array which slows it considerably.
 
@@ -100,4 +100,5 @@ Fencache contains obscure micro optimizations tested for several versions of V8 
 
 
 ### Version History
+* 1.1.0 - Oct18 : A little fix to 'put' method 
 * 0.9.0 - Aug18 : Quite tested and polished 
