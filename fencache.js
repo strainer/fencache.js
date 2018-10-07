@@ -27,7 +27,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     return fn(k ,p1,p2,p3,p4,p5,p6,p7)
   }
   
-  /// init memory in native object
+  //mode: native object
   if(rn<1){
     var stow={}, fill=0, fills=function(){}
     
@@ -42,7 +42,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
           }
     } } }
      
-    //spammed parameters much fast than .call(this,args \:o/
+    //spammed params much quicker than .call(this,args \:o/
     function nat(k ,p1,p2,p3,p4,p5,p6,p7){
       kid=id(k ,p1,p2,p3,p4,p5,p6,p7)
       if(stow[kid]) return stow[kid] 
@@ -51,7 +51,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     } 
      
     nat.state=function(){ return stow }
-    nat.reset=function(s){ stow=s||{} }
+    nat.reset=function(s){ stow=s||{} ; fill=0 }
     nat.put=function(v ,k ,p1,p2,p3,p4,p5,p6,p7){ 
       var bv=stow[kid=id(k ,p1,p2,p3,p4,p5,p6,p7)] 
       stow[kid]=v
@@ -63,7 +63,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     return nat
   }
   
-  //remember last value only
+  //mode: rem last value only
   if(rn===1) { 
     function last(kid){
       if(key===kid){ return val }
@@ -86,7 +86,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     return last
   } 
 
-  /// queue vals in nose ring buffer
+  //mode: queue vals in nose-ring buffer
   key= new Array(rn), val= new Array(rn) 
 
   var kid, rc=-1, rex=rn-1, re=1 // ring currentx, ring end max, ring end
@@ -110,7 +110,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
   
   var init=ainit
     
-  //nosering buffer has a sorting nose with a ring at tail
+  //nose-ring buffer has a sorting nose with a ring at tail
   function nsrng(k ,p1,p2,p3,p4,p5,p6,p7){
 
     init(k ,p1,p2,p3,p4,p5,p6,p7) 
@@ -141,7 +141,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     //missed, so write to fill
     if(rc===re) if(rc===rex){ rc=ra }else{ re++ }
     key[++rc]=kid
-    return val[rc]=fn(k ,p1,p2,p3,p4,p5,p6,p7) //put result in new head
+    return val[rc]=v //put result in new head
   }
 
   function val(k ,p1,p2,p3,p4,p5,p6,p7){
