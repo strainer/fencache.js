@@ -2,7 +2,7 @@
 
 if(typeof window ==='undefined'){
   require ('./xlib/mutil.js')
-  fencache=require ('../fencache.js')
+  fencache=require ('../fencache.min.js')
   _=require ('./xlib/underscore.js')
   memoiz=require ('./xlib/fastmemo.js')
   Fdrandom=require ('./xlib/Fdrandom.js')

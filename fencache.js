@@ -4,10 +4,10 @@
  *   terms of the MIT License - see License.txt for details   * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ** */
 
-'use strict' //ES5
-
 var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
-    
+  
+  'use strict' //ES5
+  
   var key, val, kid
   var id = function(k){return k}
   var h = typeof(hs)
@@ -75,7 +75,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     
     last.reset=function(s){ 
       if(s){ key=s.key ; val=s.val }else{ key=val=undefined } }
-    last.state=function() { return {key,val} }
+    last.state=function() { return {key:key,val:val} }
     last.put  =function(v,k ,p1,p2,p3,p4,p5,p6,p7){ 
       var bv=val ; val=v,key=id(k ,p1,p2,p3,p4,p5,p6,p7) 
       return bv }
@@ -152,7 +152,8 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
   nsrng.reset=function(s){ 
     if(s){ key=s.key, val=s.val, rc=s.rc, fill=s.fill }
     else{rc=0, key=new Array(rn), val=new Array(rn), init=ainit} }
-  nsrng.state=function(){ return {key,val,rc,ra,re,rex} }
+  nsrng.state=function(){ 
+    return {key:key,val:val,rc:rc,ra:ra,re:re,rex:rex} }
   nsrng.val=val
   nsrng.put=put
   nsrng.bypass=bypass
