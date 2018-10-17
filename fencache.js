@@ -23,8 +23,8 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     }
   }
   
-  function bypass(k ,p1,p2,p3,p4,p5,p6,p7){
-    return fn(k ,p1,p2,p3,p4,p5,p6,p7)
+  function bypass(k ,p1,p2,p3,p4){
+    return fn(k ,p1,p2,p3,p4)
   }
   
   //mode: native object
@@ -43,17 +43,17 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     } } }
      
     //spammed params much quicker than .call(this,args \:o/
-    function nat(k ,p1,p2,p3,p4,p5,p6,p7){
-      kid=id(k ,p1,p2,p3,p4,p5,p6,p7)
+    function nat(k ,p1,p2,p3,p4){
+      kid=id(k ,p1,p2,p3,p4)
       if(stow[kid]) return stow[kid] 
       fills()
-      return stow[kid]=fn(k ,p1,p2,p3,p4,p5,p6,p7)
+      return stow[kid]=fn(k ,p1,p2,p3,p4)
     } 
      
     nat.state=function(){ return stow }
     nat.reset=function(s){ stow=s||{} ; fill=0 }
-    nat.put=function(v ,k ,p1,p2,p3,p4,p5,p6,p7){ 
-      var bv=stow[kid=id(k ,p1,p2,p3,p4,p5,p6,p7)] 
+    nat.put=function(v ,k ,p1,p2,p3,p4){ 
+      var bv=stow[kid=id(k ,p1,p2,p3,p4)] 
       stow[kid]=v
       if(bv===undefined) fills() 
       return bv }
@@ -76,11 +76,11 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     last.reset=function(s){ 
       if(s){ key=s.key ; val=s.val }else{ key=val=undefined } }
     last.state=function() { return {key:key,val:val} }
-    last.put  =function(v,k ,p1,p2,p3,p4,p5,p6,p7){ 
-      var bv=val ; val=v,key=id(k ,p1,p2,p3,p4,p5,p6,p7) 
+    last.put  =function(v,k ,p1,p2,p3,p4){ 
+      var bv=val ; val=v,key=id(k ,p1,p2,p3,p4) 
       return bv }
-    last.val  =function(k ,p1,p2,p3,p4,p5,p6,p7)  { 
-      if(key===id(k ,p1,p2,p3,p4,p5,p6,p7)) return val }
+    last.val  =function(k ,p1,p2,p3,p4)  { 
+      if(key===id(k ,p1,p2,p3,p4)) return val }
     last.bypass=bypass
     
     return last
@@ -93,16 +93,16 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
   var ra=sizenose(rn)            // ring anchor
 
   function sizenose(n){
-    if(n<7) return n-2  //never n==1
+    if(n<7) return n-2  // !n<2
     if(n<20) return (n*0.67) >>>0 
     return 5+(n*0.37) >>>0
-    //  1:0   3:1   5:3   6:4   8:5  9:6  16:10  19:12  ...
+    // 2:0  3:1  5:3  6:4  8:5 9:6 11,12,14,15,17,18:12,22:13 ...
   }
   
   //fills array with type of first seen throughput
-  var ainit = function(k ,p1,p2,p3,p4,p5,p6,p7){
-    kid=id(k ,p1,p2,p3,p4,p5,p6,p7)
-    var v=fn(k ,p1,p2,p3,p4,p5,p6,p7)
+  var ainit = function(k ,p1,p2,p3,p4){
+    kid=id(k ,p1,p2,p3,p4)
+    var v=fn(k ,p1,p2,p3,p4)
     for(var i=0;i<key.length;i++) key[i]=kid,val[i]=v
     
     init=function(){}
@@ -111,10 +111,10 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
   var init=ainit
     
   //nose-ring buffer has a sorting nose with a ring at tail
-  function nsrng(k ,p1,p2,p3,p4,p5,p6,p7){
+  function nsrng(k ,p1,p2,p3,p4){
 
-    init(k ,p1,p2,p3,p4,p5,p6,p7) 
-    kid=id(k ,p1,p2,p3,p4,p5,p6,p7)
+    init(k ,p1,p2,p3,p4) 
+    kid=id(k ,p1,p2,p3,p4)
 
     if(key[0]===kid) return val[0] 
     
@@ -130,12 +130,12 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     //not found, so write to fill
     if(rc===re) if(rc===rex){ rc=ra }else{ re++ } 
     key[++rc]=kid
-    return val[rc]=fn(k ,p1,p2,p3,p4,p5,p6,p7) //put result in new head
+    return val[rc]=fn(k ,p1,p2,p3,p4) //put result in new head
   } 
   
-  function put(v,k ,p1,p2,p3,p4,p5,p6,p7){
-    init(k ,p1,p2,p3,p4,p5,p6,p7)
-    kid=id(k ,p1,p2,p3,p4,p5,p6,p7)
+  function put(v,k ,p1,p2,p3,p4){
+    init(k ,p1,p2,p3,p4)
+    kid=id(k ,p1,p2,p3,p4)
     for(var i=0; i<=re; i++) if(key[i]===kid) 
     { var bv=val[i] ; val[i]=v ; return bv }
     //missed, so write to fill
@@ -144,8 +144,8 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     return val[rc]=v //put result in new head
   }
 
-  function val(k ,p1,p2,p3,p4,p5,p6,p7){
-    kid=id(k ,p1,p2,p3,p4,p5,p6,p7)
+  function val(k ,p1,p2,p3,p4){
+    kid=id(k ,p1,p2,p3,p4)
     for(var i=0; i<=re; i++) if(key[i]===kid) return val[i]
   } 
 
