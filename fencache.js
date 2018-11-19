@@ -96,7 +96,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     if(n<7) return n-2  // !n<2
     if(n<20) return (n*0.67) >>>0 
     return 5+(n*0.37) >>>0
-    // 2:0  3:1  5:3  6:4  8:5 9:6 11,12,14,15,17,18:12,22:13 ...
+    // 2:0  3:1  5:3  6:4  8:5 9:6 11 12 14 15 17 18:12,22:13 ...
   }
   
   //fills array with type of first seen throughput
@@ -130,7 +130,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     //not found, so write to fill
     if(rc===re) if(rc===rex){ rc=ra }else{ re++ } 
     key[++rc]=kid
-    return val[rc]=fn(k ,p1,p2,p3,p4) //put result in new head
+    return val[rc]=fn(k ,p1,p2,p3,p4) //put result in ring
   } 
   
   function put(v,k ,p1,p2,p3,p4){
@@ -141,7 +141,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     //missed, so write to fill
     if(rc===re) if(rc===rex){ rc=ra }else{ re++ }
     key[++rc]=kid
-    return val[rc]=v //put result in new head
+    return val[rc]=v //put result in ring
   }
 
   function val(k ,p1,p2,p3,p4){
@@ -157,6 +157,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
   nsrng.val=val
   nsrng.put=put
   nsrng.bypass=bypass
+  nsrng.init=init
 
   return nsrng
     
