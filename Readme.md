@@ -4,7 +4,7 @@ Fencache.js
 
 This is a special memoizer which remembers the most repeated calculations and forgets the infrequent ones, so it avoids the possibility of excessive memory usage and recalls the most frequent calculations most speedily. It is designed for memoizing functions which operate on a mix of unique and recurring inputs.
 
-The usual kind of Javascript memoizer stores pairs of argument:result's in Javascripts native object. Fencache also includes this object based storage mode with an option to purge the store if it gets too large. But its characteristic storage can perform much better.
+The usual kind of Javascript memoizer stores pairs of argument:result's in Javascripts native object. Fencache also includes this object based storage mode with an option to purge the store if it gets too large. However the special cache storage mode (default) can perform much better.
 
 ### Basic Usage
 
