@@ -51,7 +51,10 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
     } 
      
     nat.state=function(){ return stow }
-    nat.reset=function(s){ stow=s||{} ; fill=0 }
+    nat.reset=function(s){ 
+      stow=s||{}, fill=0 
+      for (ky in stow) if(obj.hasOwnProperty(ky)) fill++
+    }
     nat.put=function(v ,k ,p1,p2,p3,p4){ 
       var bv=stow[kid=id(k ,p1,p2,p3,p4)] 
       stow[kid]=v
@@ -150,10 +153,13 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
   } 
 
   nsrng.reset=function(s){ 
-    if(s){ key=s.key, val=s.val, rc=s.rc, fill=s.fill }
-    else{rc=0, key=new Array(rn), val=new Array(rn), init=ainit} }
-  nsrng.state=function(){ 
-    return {key:key,val:val,rc:rc,ra:ra,re:re,rex:rex} }
+    if(s){ key=s.key, val=s.val, ra=s.ra, rc=s.rc, re=s.re, rex=s.rex }
+    else{
+      ra=sizenose(rn), rc=-1, re=1, rex=rn-1 
+      key=new Array(rn), val=new Array(rn), init=ainit
+    } 
+  }
+  nsrng.state=function(){ return {key:key,val:val,rc:rc,ra:ra,re:re,rex:rex} }
   nsrng.val=val
   nsrng.put=put
   nsrng.bypass=bypass
