@@ -4,7 +4,7 @@
  *   terms of the MIT License - see License.txt for details   * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ** */
 
-var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
+var fencache = function(fn,rn,hs){
   
   'use strict' //ES5
   
@@ -167,7 +167,7 @@ var fencache = function(fn,rn,hs){ return (function(fn,rn,hs){
 
   return nsrng
     
-}(fn,rn,hs)) }
+}
   
 if(typeof module!=='undefined' && module.exports) module.exports = fencache
 else if(typeof window!=='undefined') window.fencache = fencache
