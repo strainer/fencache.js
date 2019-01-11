@@ -2,13 +2,17 @@ Fencache.js
 ===========
 (Function encache)
 
-This javascript function memoizer differs from the usual kind by caching throughput in a self sorting array structure. It produces very different performance from the usual kind of memoizer that collects all results in an object, and it can work considerably faster for certain algorithms.
-The object store kind of memoizer can get excessively large if supplied lots of unique values. Fencache holds a limited number of values, and is able to forget the ones which repeat least. 
-The object store also has to transparently stringify and hash numberic parameters, which hinders performance for memoizing algebraic functions. Object stores also require extra effort to work with references to objects.
+This javascript function memoizer caches throughput in a fast ordering array structure. It has very different performance from the usual kind that collects all results in a javascript object, so it can work considerably faster in certain algorithms. 
 
-The best size of cache to set with fencache will depend on the repetitive distribution of the throughput and on the speed of the function to be memoized. A value of around 20 can often work well enough; assuming there is some useful amount of repetition. Function memoization is often advised in terms of caching very slow operations like network requests. Fencache can memoize math calculations that see millions of unique values but also values which repeat somewhat frequently.
+Since the keys of a javascript objects are strings, transparent casting of numbers must hinder performance when memoizing algebraic functions. For the same cause, to memoize Functions which take object references as parameters also requires extra effort. Fencache.js can key with any type, without need for casting.
 
-For testing and completeness fencache.js also includes an object store option, and an optimised option for store size of 1.
+Object store based memoizers can get excessively large if supplied lots of unique values. Fencache holds a limited number of entries, it is able to forget the ones which repeat least and collect the most often accessed. 
+
+The best size of cache to set with fencache depends on the repetitive distribution of the throughput and on the speed of the function to be memoized. Loosely; a value of around 20 can often work well enough, assuming there is some useful amount of repetition. Function memoization is usually advised in terms of caching very slow operations like network requests. 
+
+Fencache can memoize math calculations that see millions of unique values but also values which repeat somewhat frequently.
+
+For testing and completeness fencache.js also includes an object store option.
 
 ### Basic Usage
 
@@ -36,10 +40,10 @@ Cache size of 1 is streamlined with no cache management; ideal for when the calc
 Size 0 sets native storage mode, negative value limits the native store size. 
 ```
   enReply = fencachex(reply, 0)     //use the native object as cache
-  enReply = fencachex(reply, -1000) //flushes half the cache after 1000 entries
+  enReply = fencachex(reply, -1000) //flushes half the cache after 1000 different entries
 ```
 
-This mode may perform better for keeping thousands of equally distributed calculation results, and not requiring old results to be flushed. (Result flushing is relatively glacial)
+This mode may perform better for keeping thousands of equally distributed calculation results, and not requiring old results to be flushed. (Result flushing is relatively slow)
 
 ### Optional parameter for keying Objects and multiple arguments.
 
@@ -47,8 +51,8 @@ This mode may perform better for keeping thousands of equally distributed calcul
   enCalcObj = fencache(CalcOnObj, 1000, ob=>ob.idstring )
 ```
 In this case where CalcOnObj takes objects and processes data within them,
-a function in the third parameter, can return a value to use as the storage key.
-Without this function, in `cache mode` objects are identified by their native reference (not contents), in `native object mode` they are automatically stringified (relatively slowly).
+a function in the third parameter can return a value to use as the storage key.
+Without this function, in `cache mode` objects are identified by their native reference (not contents), in `native object mode` they are automatically stringified.
 
 When cache size is set to 1, the third parameter is ignored.
 
@@ -61,12 +65,12 @@ When cache size is set to 1, the third parameter is ignored.
   sttobj = enMathsin.state()        // returns the whole state
   enMathsin.reset(/**sttobj**/)     // clears or replaces state (memory)
   
-  //memoized functions can take up to 5 arguments
-  //but a keying function is then needed to id results
-  //to the multiple input arguments, eg:
+  // memoized functions can take up to 5 arguments
+  // but a keying function is then needed to id results
+  // to the multiple input arguments, eg:
   enpow = fencache(Math.pow,30, (a,b)=>""+a+","+b )
   cando = enpow(2,8) //(result is keyed to "2,8")
-  //here is a fast insecure way to key two numeric params:
+  // here is a fast insecure way to key two numeric params:
   enpow = fencache(Math.pow,30, (a,b)=> a + b*888888887 )
 ```
 
@@ -86,15 +90,15 @@ the cache:
 * Slowest hit on size 15 is about 1 times as fast as Math.sin
 * Slowest hit on size 500 is about 5% as fast as Math.sin
 
-'Hit return speed' is not affected by the speed of the 'carried' function as the carried function only runs on a cache miss. Cache misses take no longer than slow hits - minus the time which the cached function requires. 
+'Hit return speed' is not affected by the speed of the function to memoize as that function only runs on a cache miss. Cache misses take no longer than slow hits - plus the time which the function requires. 
 
 Basically, try values between 1 and a few hundred depending on the weight of the cached function and on the distribution of repetitive inputs. 
 
-Object store's best return time of floating point keyed data is about 8 times slower than Math.sin (25 times slower that fencaches best). The native objects performance scales better with n items stored, but still can take until about n=400 to catch up with fencaches sorted list mode - when accessed uniformly. When some processed values recur more often than others, the sorted list mode can work a great deal faster, as more of the hits are found early in its list.
+In contrast, an object store's best return time of floating point keyed data is about 8 times slower than Math.sin (25 times slower that fencaches best). The native objects performance scales better with n items stored, but still can take until about n=400 to catch up with fencaches sorted list mode - when accessed uniformly. When some processed values recur more often than others, the sorted list mode can work a great deal faster, as more of the hits are found early in its list.
 
 ### Performance Micro-Optimizations
 
-On the first call, fencache fills its two storage arrays with the first argument:result pair it sees. This allows JS engines to make the arrays contigious and monomorphic (contain only the right type) and improves the subsequent performance of the arrays. If the types are to be real numbers, make sure the first calculation is not by chance an integer, as this can mix types in the array. An 'init' method is also included to set the arrays up eg. ensine.init(-0,-0) will set the cache to non-integer number type.
+On the first call, fencache fills its two storage arrays with the first argument:result pair it sees. This allows the JS engine to make the arrays contigious and monomorphic improving the subsequent performance of the arrays. An 'init' method is also included to set the arrays up : `ensine.init(-0,-0)` will set the cache to non-integer number type. The reason for this method is, if the types are to be real numbers the first calculation might by chance be an integer, which would mix types in the array.
 
 Fencache contains other obscure micro optimizations tested for several versions of V8 and Spidermonkey, which seem appropriate for a small performance orientated tool. 
 
