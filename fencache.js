@@ -3,8 +3,9 @@
  *  This program can be redistributed and modified under the  * 
  *   terms of the MIT License - see License.txt for details   * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ** */
-
-var fencache = function(fn,rn,hs){
+(function(){
+  
+function fencache(fn,rn,hs) { 
   
   'use strict' //ES5
   
@@ -53,7 +54,7 @@ var fencache = function(fn,rn,hs){
     nat.state=function(){ return stow }
     nat.reset=function(s){ 
       stow=s||{}, fill=0 
-      for (ky in stow) if(obj.hasOwnProperty(ky)) fill++
+      for (var ky in stow) if(stow.hasOwnProperty(ky)) fill++
     }
     nat.put=function(v ,k ,p1,p2,p3,p4){ 
       var bv=stow[kid=id(k ,p1,p2,p3,p4)] 
@@ -166,9 +167,11 @@ var fencache = function(fn,rn,hs){
   nsrng.init=init
 
   return nsrng
-    
 }
   
+//export default fencache
 if(typeof module!=='undefined' && module.exports) module.exports = fencache
 else if(typeof window!=='undefined') window.fencache = fencache
 else console.log("fencache.js did not import")
+
+})()
