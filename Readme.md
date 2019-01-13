@@ -2,15 +2,21 @@ Fencache.js
 ===========
 (Function encache)
 
-This javascript function memoizer caches throughput in a fast ordering array structure. It has very different performance from the usual kind that collects all results in a javascript object, so it can work considerably faster in certain algorithms. 
+This is a javascript function memoizer which uses an array based structure for storage. It has very different performance characteristics to most javascript memoizers which use the native object type for storage, so it can work considerably faster in certain algorithms. 
 
-Since the keys of a javascript objects are strings, transparent casting of numbers must hinder performance when memoizing algebraic functions. For the same cause, to memoize Functions which take object references as parameters also requires extra effort. Fencache.js can key with any type, without need for casting.
+Function memoization is usually advised in terms of caching very slow operations like network requests but fencache.js can accelerate math calculations that see millions of unique values given enough degree of repetition.
 
-Object store based memoizers can get excessively large if supplied lots of unique values. Fencache holds a limited number of entries, it is able to forget the ones which repeat least and collect the most often accessed. 
+### Differences with usual memoizers
 
-The best size of cache to set with fencache depends on the repetitive distribution of the throughput and on the speed of the function to be memoized. Loosely; a value of around 20 can often work well enough, assuming there is some useful amount of repetition. Function memoization is usually advised in terms of caching very slow operations like network requests. 
+Since the keys of a javascript object are strings, when numbers are stored as keys (to memoize their return values) they get transparently cast to string and this hinders performance for algebraic functions. Functions which take object references as parameters also require extra effort to memoize due to casting. The storage system in Fencache.js involves no casting.
 
-Fencache can memoize math calculations that see millions of unique values but also values which repeat somewhat frequently.
+Object store based memoizers can get excessively large if supplied lots of unique values. Fencache.js holds a limited number of entries, it is able to forget entries which are recalled least and promotes the most frequent to access them most quickly. 
+
+### Storage structure
+
+Two parallel arrays store the calculation input/keys and output/return values. Each array has a head section which bubble sorts atomically on every hit, and a ring buffer in the tail section which recieves missed calculations. This is aromatically implemented with in the function `nsrng` and described as a "nose-ring buffer" just as though that's an actual thing.
+
+The best size of cache to set for fencache depends on the degree of repetition of calculations which normaly run, and on the speed of the calculating function to memoize. Loosely; a value of around 20 can often work well enough, assuming there is some useful amount of repetition. 
 
 For testing and completeness fencache.js also includes an object store option.
 
@@ -92,17 +98,18 @@ the cache:
 
 'Hit return speed' is not affected by the speed of the function to memoize as that function only runs on a cache miss. Cache misses take no longer than slow hits - plus the time which the function requires. 
 
-Basically, try values between 1 and a few hundred depending on the weight of the cached function and on the distribution of repetitive inputs. 
+Basically, try values between 1 and a few hundred depending on the weight of the cached function and on the distribution of repetitive inputs.
 
-In contrast, an object store's best return time of floating point keyed data is about 8 times slower than Math.sin (25 times slower that fencaches best). The native objects performance scales better with n items stored, but still can take until about n=400 to catch up with fencaches sorted list mode - when accessed uniformly. When some processed values recur more often than others, the sorted list mode can work a great deal faster, as more of the hits are found early in its list.
+In contrast, an object store's best return time of floating point keyed data is about 8 times slower than Math.sin (25 times slower than fencaches best). The native objects performance scales better with n items stored, but still can take until about n=400 to catch up with fencaches sorted list mode - when accessed uniformly. When some inputs recur more often than others, the sorted list mode can work a great deal faster, as more of the hits are found early in its list.
 
 ### Performance Micro-Optimizations
 
-On the first call, fencache fills its two storage arrays with the first argument:result pair it sees. This allows the JS engine to make the arrays contigious and monomorphic improving the subsequent performance of the arrays. An 'init' method is also included to set the arrays up : `ensine.init(-0,-0)` will set the cache to non-integer number type. The reason for this method is, if the types are to be real numbers the first calculation might by chance be an integer, which would mix types in the array.
+On the first call, fencache fills its two storage arrays with the first argument:result pair it sees. This allows the JS engine to make the arrays contigious and monomorphic improving the subsequent performance. An 'init' method is also included to set the arrays up eg: `ensine.init(-0,-0)` will set the cache to non-integer number type. The reason for this method is, if the types are to be real numbers the first calculation might by chance be an integer, which would mix types in the array.
 
-Fencache contains other obscure micro optimizations tested for several versions of V8 and Spidermonkey, which seem appropriate for a small performance orientated tool. 
+Fencache contains other obscure micro optimizations tested on several versions of Node and Firefox, which seem appropriate for a small performance orientated tool. 
 
 ### Version History
+* 1.3.0 - Jan19 : Fix bug in reset method
 * 1.2.0 - Oct18 : Reduced optional parameters to 5 
 * 1.1.0 - Oct18 : A little fix to 'put' method 
 * 0.9.0 - Aug18 : Quite tested 
