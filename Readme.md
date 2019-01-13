@@ -2,23 +2,23 @@ Fencache.js
 ===========
 (Function encache)
 
-This is a javascript function memoizer which uses an array based structure for storage. It has very different performance characteristics to most javascript memoizers which use the native object type for storage, so it can work considerably faster in certain algorithms. 
+This is a javascript function memoizer which uses an array based structure for storage. It has different performance characteristics to most javascript memoizers which use the native object type for storage, and can work considerably faster in certain algorithms. 
 
-Function memoization is usually advised in terms of caching very slow operations like network requests but fencache.js can accelerate math calculations that see millions of unique values given enough degree of repetition.
+Function memoization is usually advised in terms of caching very slow operations like network requests but given enough degree of repetition fencache.js can also accelerate math calculations that can see millions of unique values.
 
-### Differences with usual memoizers
+#### Differences
 
-Since the keys of a javascript object are strings, when numbers are stored as keys (to memoize their return values) they get transparently cast to string and this hinders performance for algebraic functions. Functions which take object references as parameters also require extra effort to memoize due to casting. The storage system in Fencache.js involves no casting.
+Since the keys of a javascript object are strings, when numbers are stored as keys (to memoize their return values) they get transparently cast to string and this hinders performance for algebraic functions. Functions which take object references as parameters also require extra effort to memoize due to casting to string. The storage system in Fencache.js involves no casting.
 
-Object store based memoizers can get excessively large if supplied lots of unique values. Fencache.js holds a limited number of entries, it is able to forget entries which are recalled least and promotes the most frequent to access them most quickly. 
+Object store based memoizers can get excessively large if supplied lots of unique values. Fencache.js holds a limited number of entries, it is can forget the entries which are recalled least and it promotes the most frequent to access them most quickly. 
 
-### Storage structure
+#### Storage structure
 
-Two parallel arrays store the calculation input/keys and output/return values. Each array has a head section which bubble sorts atomically on every hit, and a ring buffer in the tail section which recieves missed calculations. This is aromatically implemented with in the function `nsrng` and described as a "nose-ring buffer" just as though that's an actual thing.
+Two parallel arrays store the calculation input/keys and output/return values. Each array has a head section which bubble sorts atomically on every hit, and a ring buffer in the tail section which recieves missed calculations. In the sourcecode this function `nsrng` is described as a "nose-ring buffer" as though it's an actual thing.
 
 The best size of cache to set for fencache depends on the degree of repetition of calculations which normaly run, and on the speed of the calculating function to memoize. Loosely; a value of around 20 can often work well enough, assuming there is some useful amount of repetition. 
 
-For testing and completeness fencache.js also includes an object store option.
+For testing and completeness fencache.js also implements an object store option.
 
 ### Basic Usage
 
