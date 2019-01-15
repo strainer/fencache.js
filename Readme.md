@@ -1,24 +1,21 @@
 Fencache.js
 ===========
-(Function encache)
 
-This is a javascript function memoizer which uses an array based structure for storage. It has different performance characteristics to most javascript memoizers which use the native object type for storage, and can work considerably faster in certain algorithms. 
-
-Function memoization is usually advised in terms of caching very slow operations like network requests but given enough degree of repetition fencache.js can also accelerate math calculations that can see millions of unique values.
+This is a javascript function memoizer which uses an array based structure for storage. It has different performance characteristics to most javascript memoizers which use the native object type for storage, and can work much faster for certain algorithms. 
 
 #### Differences
 
-Since the keys of a javascript object are strings, when numbers are stored as keys (to memoize their return values) they get transparently cast to string and this hinders performance for algebraic functions. Functions which take object references as parameters also require extra effort to memoize due to casting to string. The storage system in Fencache.js involves no casting.
+Since the keys of a javascript object are strings, when floats are stored as keys (to memoize their return values) they get transparently cast to string and this hinders performance with algebraic functions. Functions which take object references as parameters also require extra effort to memoize due to casting to string. Fencache's storage involves no casting.
 
-Object store based memoizers can get excessively large if supplied lots of unique values. Fencache.js holds a limited number of entries, it is can forget the entries which are recalled least and it promotes the most frequent to access them most quickly. 
+Object store based memoizers can get excessively large if supplied lots of unique values. Fencache.js holds a limited number of entries, it forgets the entries which are recalled least and it promotes the most frequent to be accessed most quickly. 
 
 #### Storage structure
 
-Two parallel arrays store the calculation input/keys and output/return values. Each array has a head section which bubble sorts atomically on every hit, and a ring buffer in the tail section which recieves missed calculations. In the sourcecode this function `nsrng` is described as a "nose-ring buffer" as though it's an actual thing.
+Two arrays in parallel store the calculation input/keys and output/return values. The arrays have a head section which incrementally bubble sorts on every hit, and in the tail a ring buffer that receives any missed calculations and swaps any hits into the sorting section. If this were an actual thing it might be called a "nose-ring cache"; two different abstract data types mechanically combined for efficiency. It's mostly in the private [function `nsrng`](https://github.com/strainer/fencache.js/blob/56b46f0f474a046c03533936815d0f7c94936840/fencache.js#L118).
 
-The best size of cache to set for fencache depends on the degree of repetition of calculations which normaly run, and on the speed of the calculating function to memoize. Loosely; a value of around 20 can often work well enough, assuming there is some useful amount of repetition. 
+The best size for the cache depends on the speed of the calculating function to memoize and on the degree of repetition of calculations which will run. Loosely, a value of around 20 can often work well enough assuming there is a useful amount of repetition. 
 
-For testing and completeness fencache.js also implements an object store option.
+To be keen and for testing fencache.js also implements an object store option, but no Map option.
 
 ### Basic Usage
 
@@ -80,7 +77,7 @@ When cache size is set to 1, the third parameter is ignored.
   enpow = fencache(Math.pow,30, (a,b)=> a + b*888888887 )
 ```
 
-### Cache Size Choice
+### Performance and Cache Size
  
 Where 'mixed hit' means average time to randomly access and return 
 results from a full cache:
@@ -104,7 +101,7 @@ In contrast, an object store's best return time of floating point keyed data is 
 
 ### Performance Micro-Optimizations
 
-On the first call, fencache fills its two storage arrays with the first argument:result pair it sees. This allows the JS engine to make the arrays contigious and monomorphic improving the subsequent performance. An 'init' method is also included to set the arrays up eg: `ensine.init(-0,-0)` will set the cache to non-integer number type. The reason for this method is, if the types are to be real numbers the first calculation might by chance be an integer, which would mix types in the array.
+On the first call, fencache fills its two storage arrays with the first argument:result pair it sees. This allows the JS engine to make the arrays contiguous and monomorphic improving the subsequent performance. An 'init' method is also included to set the arrays up eg: `ensine.init(-0,-0)` will set the cache to non-integer number type. The reason for this method is, if the types are to be real numbers the first calculation might by chance be an integer, which would mix types in the array.
 
 Fencache contains other obscure micro optimizations tested on several versions of Node and Firefox, which seem appropriate for a small performance orientated tool. 
 
