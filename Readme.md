@@ -57,6 +57,15 @@ In this case where CalcOnObj takes objects and processes data within them,
 a function in the third parameter can return a value to use as the storage key.
 Without this function, in `cache mode` objects are identified by their native reference (not contents), in `native object mode` they are automatically stringified.
 
+```
+  // memoized functions can take up to 5 arguments
+  // but a keying function is then needed to id results
+  // to the multiple input arguments, eg:
+  enpow = fencache(Math.pow,30, (a,b)=>""+a+","+b )
+  cando = enpow(2,8) //(result is keyed to "2,8")
+  // here is a fast insecure way to key two numeric params:
+  enpow = fencache(Math.pow,30, (a,b)=> a + b*888888887 )
+```
 When cache size is set to 1, the third parameter is ignored.
 
 ### Other Methods
@@ -66,15 +75,7 @@ When cache size is set to 1, the third parameter is ignored.
   cchval = enMathsin.val(k)    // returns cached val without calculating 
   oldval = enMathsin.put(val,key)   // sets val to key, returns old val 
   sttobj = enMathsin.state()        // returns the whole state
-  enMathsin.reset(/**sttobj**/)     // clears or replaces state (memory)
-  
-  // memoized functions can take up to 5 arguments
-  // but a keying function is then needed to id results
-  // to the multiple input arguments, eg:
-  enpow = fencache(Math.pow,30, (a,b)=>""+a+","+b )
-  cando = enpow(2,8) //(result is keyed to "2,8")
-  // here is a fast insecure way to key two numeric params:
-  enpow = fencache(Math.pow,30, (a,b)=> a + b*888888887 )
+  enMathsin.reset(/**sttobj**/)     // clears or replaces state (memory)  
 ```
 
 ### Performance and Cache Size
