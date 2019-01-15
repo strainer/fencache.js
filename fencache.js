@@ -94,7 +94,7 @@ function fencache(fn,rn,hs) {
   key= new Array(rn), val= new Array(rn) 
 
   var kid, rc=-1, rex=rn-1, re=1 // ring currentx, ring end max, ring end
-  var ra=sizenose(rn)            // ring anchor
+  var ra=sizenose(rn)            // ring anchor (nose end+1)
 
   function sizenose(n){
     if(n<7) return n-2  // !n<2
@@ -114,7 +114,7 @@ function fencache(fn,rn,hs) {
   
   var init=ainit
     
-  //nose-ring buffer has a sorting nose with a ring at tail
+  //nose-ring cache has a sorting nose with a ring at tail
   function nsrng(k ,p1,p2,p3,p4){
 
     init(k ,p1,p2,p3,p4) 
