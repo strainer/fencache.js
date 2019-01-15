@@ -51,11 +51,11 @@ This mode may perform better for keeping thousands of equally distributed calcul
 ### Optional parameter for keying Objects and multiple arguments.
 
 ```
-  enCalcObj = fencache(CalcOnObj, 1000, ob=>ob.idstring )
+  enCalcObj = fencache(calcOnObj, 1000, ob=>ob.idstring )
 ```
-In this case where CalcOnObj takes objects and processes data within them,
+In this case where calcOnObj takes objects and processes data within them,
 a function in the third parameter can return a value to use as the storage key.
-Without this function, in `cache mode` objects are identified by their native reference (not contents), in `native object mode` they are automatically stringified. Memoized functions can take up to 5 arguments but a keying function is then needed to id results to the multiple input arguments:
+Without this function, in default mode objects are identified by their native reference (not contents), in native object mode they are automatically stringified. Memoized functions can take up to 5 arguments but a keying function is then needed to id results to the multiple input arguments:
 
 ```
   enpow = fencache(Math.pow,30, (a,b)=>""+a+","+b )
