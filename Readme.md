@@ -55,12 +55,9 @@ This mode may perform better for keeping thousands of equally distributed calcul
 ```
 In this case where CalcOnObj takes objects and processes data within them,
 a function in the third parameter can return a value to use as the storage key.
-Without this function, in `cache mode` objects are identified by their native reference (not contents), in `native object mode` they are automatically stringified.
+Without this function, in `cache mode` objects are identified by their native reference (not contents), in `native object mode` they are automatically stringified. Memoized functions can take up to 5 arguments but a keying function is then needed to id results to the multiple input arguments:
 
 ```
-  // memoized functions can take up to 5 arguments
-  // but a keying function is then needed to id results
-  // to the multiple input arguments, eg:
   enpow = fencache(Math.pow,30, (a,b)=>""+a+","+b )
   cando = enpow(2,8) //(result is keyed to "2,8")
   // here is a fast insecure way to key two numeric params:
