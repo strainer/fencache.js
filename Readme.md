@@ -104,6 +104,7 @@ On the first call, fencache fills its two storage arrays with the first argument
 Fencache contains other obscure micro optimizations tested on several versions of Node and Firefox, which seem appropriate for a small performance orientated tool. 
 
 ### Version History
+* 1.4.0 - Jan19 : Correct put method
 * 1.3.0 - Jan19 : Fix bug in reset method
 * 1.2.0 - Oct18 : Reduced optional parameters to 5 
 * 1.1.0 - Oct18 : A little fix to 'put' method 

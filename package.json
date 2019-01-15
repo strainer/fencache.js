@@ -1,6 +1,6 @@
 {
   "name": "fencache",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A fast memoizer which forgets least accessed calculations",
   "main": "fencache.js",
   "scripts": {

@@ -30,11 +30,11 @@ function fencache(fn,rn,hs) {
   
   //mode: native object
   if(rn<1){
-    var stow={}, fill=0, fills=function(){}
+    var stow={}, fill=0, checkfull=function(){}
     
     if(rn<0){ //limit stow size
       rn=0-rn
-      fills=function(){
+      checkfull=function(){
         if(fill++>rn){
           var hlfng=rn>>>1
           for(var prop in stow) if(stow.hasOwnProperty(prop)){
@@ -47,7 +47,7 @@ function fencache(fn,rn,hs) {
     function nat(k ,p1,p2,p3,p4){
       kid=id(k ,p1,p2,p3,p4)
       if(stow[kid]) return stow[kid] 
-      fills()
+      checkfull()
       return stow[kid]=fn(k ,p1,p2,p3,p4)
     } 
      
@@ -59,7 +59,7 @@ function fencache(fn,rn,hs) {
     nat.put=function(v ,k ,p1,p2,p3,p4){ 
       var bv=stow[kid=id(k ,p1,p2,p3,p4)] 
       stow[kid]=v
-      if(bv===undefined) fills() 
+      if(bv===undefined) checkfull() 
       return bv }
     nat.val=function(k){ return stow[id(k)] }
     nat.bypass=bypass
@@ -103,7 +103,7 @@ function fencache(fn,rn,hs) {
     // 2:0  3:1  5:3  6:4  8:5 9:6 11 12 14 15 17 18:12,22:13 ...
   }
   
-  //fills array with type of first seen throughput
+  //checkfull array with type of first seen throughput
   var ainit = function(k ,p1,p2,p3,p4){
     kid=id(k ,p1,p2,p3,p4)
     var v=fn(k ,p1,p2,p3,p4)
@@ -137,15 +137,24 @@ function fencache(fn,rn,hs) {
     return val[rc]=fn(k ,p1,p2,p3,p4) //put result in ring
   } 
   
-  function put(v,k ,p1,p2,p3,p4){
+  function put(v,k ,p1,p2,p3,p4){ //almost same as nsrng
+
     init(k ,p1,p2,p3,p4)
     kid=id(k ,p1,p2,p3,p4)
-    for(var i=0; i<=re; i++) if(key[i]===kid) 
-    { var bv=val[i] ; val[i]=v ; return bv }
-    //missed, so write to fill
+
+    for(var i=0; i<=re; i++) if(key[i]===kid) { 
+      
+      var bv=val[i], j 
+      if(i<=ra){ j=i-1 }else{ j=ra }
+       
+      key[i]=key[j] ,val[i]=val[j]
+      key[j]=kid    ,val[j]=v
+      return bv 
+    }
+    
     if(rc===re) if(rc===rex){ rc=ra }else{ re++ }
-    key[++rc]=kid
-    return val[rc]=v //put result in ring
+    key[++rc]=kid ,val[rc]=v
+    return //return nothing found
   }
 
   function val(k ,p1,p2,p3,p4){
