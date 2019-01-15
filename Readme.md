@@ -5,7 +5,7 @@ This is a javascript function memoizer which uses an array based structure for s
 
 #### Differences
 
-The keys of a javascript object must be string, so when floats are stored as keys (to memoize their return values) they get transparently cast to string which hinders performance with algebraic functions. Functions that take object references as parameters also require extra effort to memoize due to casting to string. Fencache's storage involves no casting.
+The keys of a javascript object must be string, so when floats are stored as object keys (to memoize their return values) they get transparently cast to string which hinders performance with algebraic functions. Functions that take object references as parameters also require extra effort to memoize due to casting to string. Fencache's storage involves no casting.
 
 Object store based memoizers can get excessively large if supplied lots of unique values. Fencache.js holds a limited number of entries, it forgets the entries which are recalled least and it promotes the most frequent to be accessed most quickly. 
 
