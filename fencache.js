@@ -103,7 +103,7 @@ function fencache(fn,rn,hs) {
     // 2:0  3:1  5:3  6:4  8:5 9:6 11 12 14 15 17 18:12,22:13 ...
   }
   
-  //checkfull array with type of first seen throughput
+  //fill array with type of first seen throughput
   var ainit = function(k ,p1,p2,p3,p4){
     kid=id(k ,p1,p2,p3,p4)
     var v=fn(k ,p1,p2,p3,p4)
