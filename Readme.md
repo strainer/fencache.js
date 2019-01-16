@@ -11,7 +11,7 @@ Object store based memoizers can get excessively large if supplied lots of uniqu
 
 #### Storage structure
 
-Two arrays in parallel store the calculation input/key values and output/return values. The arrays have a head section where entries are incrementally bubble sorted on every hit, and in the remaining space a ring buffer receives any missed calculations and swaps any hits into the lowest position of the sorting section. If this arrangement were a standard thing it might be called a "nose-ring cache". It is two different abstract data types combined low level for efficiency, done mostly in the private [function `nsrng`](https://github.com/strainer/fencache.js/blob/56b46f0f474a046c03533936815d0f7c94936840/fencache.js#L118).
+Two arrays in parallel store the calculation input/key values and output/return values. The arrays have a head section where entries are incrementally bubble sorted on every hit, and in the remaining space a ring buffer receives any missed calculations and swaps any hits into the lowest position of the sorting section. If this arrangement were a standard thing it might be called a "nose-ring cache". It is two different abstract data types combined low level for efficiency, done mostly in the private [function `nsrng`](https://github.com/strainer/fencache.js/blob/master/fencache.js#L118).
 
 The best size for the cache depends on the speed of the calculating function to memoize and on the degree of repetition of calculations which will run. Loosely, a value of around 20 can often work well enough assuming there is a useful amount of repetition. 
 
