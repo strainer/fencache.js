@@ -42,8 +42,8 @@ Cache size of 1 is streamlined with no cache management; ideal for when the calc
 
 Size 0 sets native storage mode, negative value limits the native store size. 
 ```
-  enReply = fencachex(reply, 0)     //use the native object as cache
-  enReply = fencachex(reply, -1000) //flushes half the cache after 1000 different entries
+  enReply = fencache(reply, 0)     //use the native object as cache
+  enReply = fencache(reply, -1000) //flushes half the cache after 1000 different entries
 ```
 
 This mode may perform better for keeping thousands of equally distributed calculation results, and not requiring old results to be flushed. (Result flushing is relatively slow)
