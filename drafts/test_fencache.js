@@ -2,6 +2,7 @@
 
 if(typeof window ==='undefined'){
   require ('./xlib/mutil.js')
+  //~ fencache=require ('../fencache.js')
   fencache=require ('../fencache.js')
   _=require ('./xlib/underscore.js')
   memoiz=require ('./xlib/fastmemo.js')
@@ -851,12 +852,13 @@ var fentest2 =[
 ]
 
 
-var ysinm100 = fencache( mulsin  ,-200 )
-var ysinm2   = fencache( mulsin  ,-2 )
-var ysinm1   = fencache( mulsin  ,-1 )
-var ysinm0   = fencache( mulsin  ,0 )
-var _ysin    = _.memoize( mulsin )
-var zysin    =   memoiz( mulsin  ,0 )
+var enmulsin_m100 = fencache( mulsin  ,-200 )
+var enmulsin_m2   = fencache( mulsin  ,-2 )
+var enmulsin_m1   = fencache( mulsin  ,-1 )
+var enmulsin_m0   = fencache( mulsin  ,0 )
+var _enmulsin_    = _.memoize( mulsin )
+var memmulsin    =   memoiz( mulsin  ,0 )
+
 
 
 var fentest3 =[
@@ -878,8 +880,8 @@ var fentest3 =[
 ,
 
   (function(){ 
-  var arn="a1000r100g" ,fnn="ysinm1"
-  var arr= a1000r100g  ,fun=ysinm1
+  var arn="a1000r100g" ,fnn="enmulsin_m1"
+  var arr= a1000r100g  ,fun=enmulsin_m1
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -893,8 +895,8 @@ var fentest3 =[
 } }())
 ,
   (function(){ 
-  var arn="a1000r100g" ,fnn="ysinm0 (store all)"
-  var arr= a1000r100g  ,fun=ysinm0
+  var arn="a1000r100g" ,fnn="enmulsin_m0 (store all)"
+  var arr= a1000r100g  ,fun=enmulsin_m0
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -909,8 +911,8 @@ var fentest3 =[
 ,
 
   (function(){ 
-  var arn="a1000r100g" ,fnn="ysinm100"
-  var arr= a1000r100g  ,fun=ysinm100
+  var arn="a1000r100g" ,fnn="enmulsin_m100"
+  var arr= a1000r100g  ,fun=enmulsin_m100
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -931,15 +933,26 @@ var msinm0    = fencache( Math.sin,0 )
 var zmsin     = memoiz( Math.sin )
 
 var msin1    = fencache( Math.sin,1 )
-var ysin1    = fencache( mulsin  ,1 )
-var ytsin1    = fencache( mulsin.bind(this)  ,1 )
-var ysin2    = fencache( mulsin  ,2 )
-var ysin3    = fencache( mulsin  ,3 )
-var ysin12   = fencache( mulsin  ,12 )
-var ysin60   = fencache( mulsin  ,60 )
-var ysin100  = fencache( mulsin  ,100 )
-var ysin300  = fencache( mulsin  ,300 )
-var ysinm0  =  fencache( mulsin  ,0 )
+var enmulsin_1    = fencache( mulsin  ,1 )
+var enmulsinbnd    = fencache( mulsin.bind(this)  ,1 )
+var enmulsin_2    = fencache( mulsin  ,2 )
+var enmulsin_3    = fencache( mulsin  ,3 )
+var enmulsin_12   = fencache( mulsin  ,12 )
+var enmulsin_60   = fencache( mulsin  ,60 )
+var enmulsin_100  = fencache( mulsin  ,100 )
+var enmulsin_300  = fencache( mulsin  ,300 )
+var enmulsin_m0  =  fencache( mulsin  ,0 )
+
+
+//~ enmulsin_2.init("a","a")
+//~ enmulsin_12.init("a","a")
+//~ enmulsin_60.init("a","a")
+//~ enmulsin_100.init("a","a")
+
+enmulsin_2.init  (-0,-0)
+enmulsin_12.init (-0,-0)
+enmulsin_60.init (-0,-0)
+enmulsin_100.init(-0,-0)
 
 var fentest4 =[
 
@@ -960,8 +973,8 @@ var fentest4 =[
 ,
 
   (function(){ 
-  var arn="a1000r100g" ,fnn="ysin1"
-  var arr= a1000r100g  ,fun=ysin1
+  var arn="a1000r100g" ,fnn="enmulsin_1"
+  var arr= a1000r100g  ,fun=enmulsin_1
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -976,8 +989,8 @@ var fentest4 =[
 ,
 
   (function(){ 
-  var arn="a1000r100g" ,fnn="ysin2"
-  var arr= a1000r100g  ,fun=ysin2
+  var arn="a1000r100g" ,fnn="enmulsin_2"
+  var arr= a1000r100g  ,fun=enmulsin_2
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -992,8 +1005,8 @@ var fentest4 =[
 ,
 
   (function(){ 
-  var arn="a1000r100g" ,fnn="ysin12"
-  var arr= a1000r100g  ,fun=ysin12
+  var arn="a1000r100g" ,fnn="enmulsin_12"
+  var arr= a1000r100g  ,fun=enmulsin_12
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1007,8 +1020,8 @@ var fentest4 =[
 } }()),
 
   (function(){ 
-  var arn="a1000r100g" ,fnn="ysin60"
-  var arr= a1000r100g  ,fun=ysin60
+  var arn="a1000r100g" ,fnn="enmulsin_60"
+  var arr= a1000r100g  ,fun=enmulsin_60
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1023,8 +1036,8 @@ var fentest4 =[
 ,
 
   (function(){ 
-  var arn="a1000r100g" ,fnn="ysin100"
-  var arr= a1000r100g  ,fun=ysin100
+  var arn="a1000r100g" ,fnn="enmulsin_100"
+  var arr= a1000r100g  ,fun=enmulsin_100
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1039,8 +1052,8 @@ var fentest4 =[
 ,
 
   (function(){ 
-  var arn="a1000r100g" ,fnn="ysinm0"
-  var arr= a1000r100g  ,fun=ysinm0
+  var arn="a1000r100g" ,fnn="enmulsin_m0"
+  var arr= a1000r100g  ,fun=enmulsin_m0
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1055,8 +1068,8 @@ var fentest4 =[
 ,
 
   (function(){ 
-  var arn="a1000r100g" ,fnn="_ysin"
-  var arr= a1000r100g  ,fun=_ysin
+  var arn="a1000r100g" ,fnn="_enmulsin_"
+  var arr= a1000r100g  ,fun=_enmulsin_
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1071,8 +1084,8 @@ var fentest4 =[
 ,
 
   (function(){ 
-  var arn="a1000r100g" ,fnn="zysin"
-  var arr= a1000r100g  ,fun=zysin
+  var arn="a1000r100g" ,fnn="memmulsin"
+  var arr= a1000r100g  ,fun=memmulsin
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1106,8 +1119,8 @@ var fentest5 =[
 ,
 
   (function(){ 
-  var arn="a1000r20g" ,fnn="ysin1"
-  var arr= a1000r20g  ,fun=ysin1
+  var arn="a1000r20g" ,fnn="enmulsin_1"
+  var arr= a1000r20g  ,fun=enmulsin_1
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1122,8 +1135,8 @@ var fentest5 =[
 ,
 
   (function(){ 
-  var arn="a1000r20g" ,fnn="ysin2"
-  var arr= a1000r20g  ,fun=ysin2
+  var arn="a1000r20g" ,fnn="enmulsin_2"
+  var arr= a1000r20g  ,fun=enmulsin_2
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1138,8 +1151,8 @@ var fentest5 =[
 ,
 
   (function(){ 
-  var arn="a1000r20g" ,fnn="ysin12"
-  var arr= a1000r20g  ,fun=ysin12
+  var arn="a1000r20g" ,fnn="enmulsin_12"
+  var arr= a1000r20g  ,fun=enmulsin_12
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1153,8 +1166,8 @@ var fentest5 =[
 } }()),
 
   (function(){ 
-  var arn="a1000r20g" ,fnn="ysin60"
-  var arr= a1000r20g  ,fun=ysin60
+  var arn="a1000r20g" ,fnn="enmulsin_60"
+  var arr= a1000r20g  ,fun=enmulsin_60
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1169,8 +1182,8 @@ var fentest5 =[
 ,
 
   (function(){ 
-  var arn="a1000r20g" ,fnn="ysin100"
-  var arr= a1000r20g  ,fun=ysin100
+  var arn="a1000r20g" ,fnn="enmulsin_100"
+  var arr= a1000r20g  ,fun=enmulsin_100
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1185,8 +1198,8 @@ var fentest5 =[
 ,
 
   (function(){ 
-  var arn="a1000r20g" ,fnn="ysinm0"
-  var arr= a1000r20g  ,fun=ysinm0
+  var arn="a1000r20g" ,fnn="enmulsin_m0"
+  var arr= a1000r20g  ,fun=enmulsin_m0
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1201,8 +1214,8 @@ var fentest5 =[
 ,
 
   (function(){ 
-  var arn="a1000r20g" ,fnn="_ysin"
-  var arr= a1000r20g  ,fun=_ysin
+  var arn="a1000r20g" ,fnn="_enmulsin_"
+  var arr= a1000r20g  ,fun=_enmulsin_
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1217,8 +1230,8 @@ var fentest5 =[
 ,
 
   (function(){ 
-  var arn="a1000r20g" ,fnn="zysin"
-  var arr= a1000r20g  ,fun=zysin
+  var arn="a1000r20g" ,fnn="memmulsin"
+  var arr= a1000r20g  ,fun=memmulsin
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1236,8 +1249,8 @@ var fentest5 =[
 var fentest6 =[
   
  //~ (function(){ 
-    //~ var arn="a1000r1e" ,fnn="ysin1"
-    //~ var arr= a1000r1e  ,fun=ysin1
+    //~ var arn="a1000r1e" ,fnn="enmulsin_1"
+    //~ var arr= a1000r1e  ,fun=enmulsin_1
    
     //~ return{
       //~ desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1267,8 +1280,8 @@ var fentest6 =[
 ,
 
   (function(){ 
-  var arn="a1000r8g" ,fnn="ysin1"
-  var arr= a1000r8g  ,fun=ysin1
+  var arn="a1000r8g" ,fnn="enmulsin_1"
+  var arr= a1000r8g  ,fun=enmulsin_1
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1283,8 +1296,8 @@ var fentest6 =[
 ,
 
   (function(){ 
-  var arn="a1000r8g" ,fnn="ysin2"
-  var arr= a1000r8g  ,fun=ysin2
+  var arn="a1000r8g" ,fnn="enmulsin_2"
+  var arr= a1000r8g  ,fun=enmulsin_2
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1299,8 +1312,8 @@ var fentest6 =[
 ,
 
   (function(){ 
-  var arn="a1000r8g" ,fnn="ysin12"
-  var arr= a1000r8g  ,fun=ysin12
+  var arn="a1000r8g" ,fnn="enmulsin_12"
+  var arr= a1000r8g  ,fun=enmulsin_12
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1314,8 +1327,8 @@ var fentest6 =[
 } }()),
 
   (function(){ 
-  var arn="a1000r8g" ,fnn="ysin60"
-  var arr= a1000r8g  ,fun=ysin60
+  var arn="a1000r8g" ,fnn="enmulsin_60"
+  var arr= a1000r8g  ,fun=enmulsin_60
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1330,8 +1343,8 @@ var fentest6 =[
 ,
 
   (function(){ 
-  var arn="a1000r8g" ,fnn="ysin100"
-  var arr= a1000r8g  ,fun=ysin100
+  var arn="a1000r8g" ,fnn="enmulsin_100"
+  var arr= a1000r8g  ,fun=enmulsin_100
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1346,8 +1359,8 @@ var fentest6 =[
 ,
 
   (function(){ 
-  var arn="a1000r8g" ,fnn="ysinm0"
-  var arr= a1000r8g  ,fun=ysinm0
+  var arn="a1000r8g" ,fnn="enmulsin_m0"
+  var arr= a1000r8g  ,fun=enmulsin_m0
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1362,8 +1375,8 @@ var fentest6 =[
 ,
 
   (function(){ 
-  var arn="a1000r8g" ,fnn="_ysin"
-  var arr= a1000r8g  ,fun=_ysin
+  var arn="a1000r8g" ,fnn="_enmulsin_"
+  var arr= a1000r8g  ,fun=_enmulsin_
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1378,8 +1391,8 @@ var fentest6 =[
              ,
 
   (function(){ 
-  var arn="a1000r8g" ,fnn="zysin"
-  var arr= a1000r8g  ,fun=zysin
+  var arn="a1000r8g" ,fnn="memmulsin"
+  var arr= a1000r8g  ,fun=memmulsin
  
   return{
     desc:fnn ,code:"r+="+fnn+"("+arn+"[i])"
@@ -1402,16 +1415,15 @@ var msin2   = fencache( Math.sin,2 )
 var msin1   = fencache( Math.sin,1 )
 
 
-
 var testlist=[
  {rc:warmupset     ,ds:"warmup benchmarks"}
-,{rc:fentest1      ,ds:"fencache"} 
+//~ ,{rc:fentest1      ,ds:"fencache"} 
 //~ ,{rc:fentest2      ,ds:"fencacheb"}
 //~ ,{rc:fentest3      ,ds:"stored, multi_trig, 100norm"}
 //~ ,{rc:fentest4      ,ds:"ringed, multi_trig, 100norm"}
 
 //~ ,{rc:fentest5      ,ds:"ringed, multi_trig, 20norm"}
-//~ ,{rc:fentest6      ,ds:"ringed, multi_trig, 8norm"}
+,{rc:fentest6      ,ds:"ringed, multi_trig, 8norm"}
 ]
 
 var testlenseconds=1.2, reps=2
