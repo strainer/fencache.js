@@ -11,7 +11,7 @@ Fencache also efficiently sorts its array based cache on every hit so the most f
 
 #### Storage structure
 
-Two arrays in parallel store the memoized functions input and output values. The arrays have a head section where entries are incrementally bubble sorted on every hit, and in the remaining space a ring buffer receives any missed calculations and swaps any hits into the lowest position of the sorting section. If it needed a name it would be called a "nose-ring cache". It is two different abstract data types combined for efficiency, done mostly in this private [function `nsrng`](https://github.com/strainer/fencache.js/blob/master/fencache.js#L118).
+Two arrays in parallel store the memoized functions input and output values. The arrays have a head section where entries are incrementally bubble sorted on every hit, and in the remaining space a ring buffer receives any missed calculations and swaps any hits into the lowest position of the sorting section. If it needed a name it would be called a "nose-ring cache". It is two different abstract data types combined for efficiency, done mostly in this private [function `nsrng`](https://github.com/strainer/fencache.js/blob/master/fencache.js#L118). 
 
 The best size for the cache depends on the speed of the function to memoize and on the degree of repetition of calculations which will run. A size of around 20 can often work well enough assuming there is a useful amount of repetition. 
 
@@ -101,7 +101,7 @@ In contrast, an object store's best return time of floating point keyed data is 
 
 On the first call, fencache fills its two storage arrays with the first argument:result pair it sees. This allows the JS engine to make the arrays contiguous and monomorphic improving the subsequent performance. An 'init' method is also included to set the arrays up eg: `ensine.init(-0,-0)` will set the cache to non-integer number type. The reason for this method is, if the types are to be real numbers the first calculation might by chance be an integer, which would mix types in the array.
 
-Fencache contains other obscure micro optimizations tested on several versions of Node and Firefox, which seem appropriate for a small performance orientated tool. 
+Fencache contains other obscure micro optimizations tested on several versions of Node and Firefox, which seem appropriate for a small performance orientated tool. I know its weirdly formatted but sure its all the same once minimized anyway.
 
 ### Version History
 * 1.4.0 - Jan19 : Correct put method
