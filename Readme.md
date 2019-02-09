@@ -11,7 +11,7 @@ Fencache also efficiently sorts its array based cache on every hit so the most f
 
 #### Storage structure
 
-Two arrays in parallel store the memoized functions input and output values. The arrays have a head section where entries are incrementally bubble sorted on every hit, and in the remaining space a ring buffer receives any missed calculations and swaps any hits into the lowest position of the sorting section. If it needed a name it would be called a "nose-ring cache". It is two different abstract data types combined for efficiency, done mostly in this private [function `nsrng`](https://github.com/strainer/fencache.js/blob/master/fencache.js#L118). 
+Two arrays in parallel store the memoized functions input and output values. The arrays have a head section where entries are incrementally bubble sorted on every hit, and in the remaining space a ring buffer receives any missed calculations and swaps any hits into the last position of the sorting section. If this structure needed a name it could be called a "nose-ring cache". It is two different abstract data types combined for efficiency, done mostly in this private [function `nsrng`](https://github.com/strainer/fencache.js/blob/master/fencache.js#L118). 
 
 The best size for the cache depends on the speed of the function to memoize and on the degree of repetition of calculations which will run. A size of around 20 can often work well enough assuming there is a useful amount of repetition. 
 
