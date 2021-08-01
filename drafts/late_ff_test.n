@@ -1,0 +1,40 @@
+comparing underscores memoizer to a case of 500 results, on firefox 2021
+
+Testing: warmup benchmarks 
+  Code: Math.sqrt(i)  ( squareroot ) 
+    136.7323 Kfunc/s   avg : 7455.619881760318 
+    154.4427 Kfunc/s   avg : 7455.619881755367 
+  Code: r+=i  ( fastest dummy test ) 
+    494.8802 Kfunc/s   avg : 125002.5 
+    374.3408 Kfunc/s   avg : 125002.5 
+  Avg op/s 290099.00691537646 
+mutil.js:282:13
+Testing: number, sin, mixed hit:500 
+  Code: r+=Math.sin(number[i])  ( Math.sin ) 
+    28.2365 Kfunc/s   avg : 3.920301118039033e-13
+    33.6509 Kfunc/s   avg : 3.92030111803885e-13 
+  Code: r+=ensin_0(number[i])  ( ensin_0 ) 
+    1.2053 Kfunc/s   avg : 3.92030111804194e-13
+    1.7656 Kfunc/s   avg : 3.92030111804194e-13
+  Code: r+=ensin__(number[i])  ( ensin__ ) 
+    1.5564 Kfunc/s   avg : 3.92030111804194e-13 
+    1.3629 Kfunc/s   avg : 3.92030111804194e-13 
+  Code: r+=ensin:500(number[i])  ( ensin:500 ) 
+    1.5821 Kfunc/s   avg : 3.92030111804194e-13 
+    1.0524 Kfunc/s   avg : 3.9203011180419395e-13
+  Avg op/s 8801.531209662862 
+
+Testing: number, multisin, mixed hit:500 
+  Code: r+=Multi.sin(number[i])  ( Multi.sin ) 
+    4.6483 Kfunc/s   avg : -76.39881759946037 
+    2.6075 Kfunc/s   avg : -76.39881759946057 
+  Code: r+=enmulti_0(number[i])  ( enmulti_0 ) 
+    872.2899  func/s   avg : -76.39881759946137
+    942.9967  func/s   avg : -76.39881759946131
+  Code: r+=enmulti__(number[i])  ( enmulti__ ) 
+    710.5950  func/s   avg : -76.3988175994616 
+    901.1175  func/s   avg : -76.39881759946137
+  Code: r+=enmulti:500(number[i])  ( enmulti:500 )
+    885.4073  func/s   avg : -76.39881759946148 
+    1.8303 Kfunc/s   avg : -76.39881759946084 
+  Avg op/s 1674.8084256709367
