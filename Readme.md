@@ -5,9 +5,9 @@ This javascript function memoizer uses an array based structure for storage whic
 
 #### Performance Differences
 
-Fencache can memoize math functions in practice over tens times as quickly as the best popular libraries, because unlike them it does not use native objects for storage. Native objects cast numeric keys to strings which is a big performance hit working with floating point values.
+Fencache can memoize math functions in practice much faster than other popular memoizers, as it does not use native objects for storage. Native objects cast numeric keys to strings which is a big performance hit working with floating point values.
 
-Fencache also efficiently sorts its array based cache on every hit so the most frequently seen values are returned most quickly. It also sets a limit to the number of cached input/output pairs and it overwrites the most unused values instead of growing an excessive memory demand, which is a vulnerability that most object store based memoizers have.
+Fencache also does a sort step in its array based cache on every hit so the most frequently seen values are returned most quickly. It also sets a limit to the number of cached input/output pairs and it overwrites the most unused values instead of growing an excessive memory demand, which is a vulnerability that most object store based memoizers have.
 
 #### Storage structure
 
@@ -40,7 +40,7 @@ Cache size of 1 is streamlined with no cache management; ideal for when the calc
 
 ### Native store mode
 
-Size 0 sets native storage mode, negative value limits the native store size. 
+Size 0 sets native storage mode, a negative value limits the native store size. 
 ```
   enReply = fencache(reply, 0)     //use the native object as cache
   enReply = fencache(reply, -1000) //flushes half the cache after 1000 different entries
@@ -55,7 +55,7 @@ This mode may perform better for keeping thousands of equally distributed calcul
 ```
 In this case where calcOnObj takes objects and processes data within them,
 a function in the third parameter can return a value to use as the storage key.
-Without this function, in default mode objects are identified by their native reference (not contents), in native object mode they are automatically stringified. Memoized functions can take up to 5 arguments but a keying function is then needed to id results to the multiple input arguments:
+Without this function, in fencaches default mode objects are identified by their native reference (not contents), in the native object mode they are automatically stringified. Memoized functions can take up to 5 arguments but a keying function is then needed to id results to the multiple input arguments:
 
 ```
   enpow = fencache(Math.pow,30, (a,b)=>""+a+","+b )
